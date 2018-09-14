@@ -8,16 +8,36 @@ In JavaScript, an object may have a link to a prototype for delegation. If a pro
 *ES5 constructor function version:*
 
 ```javascript
-function Greeter (name) {
-  this.name = name || 'John Doe';
+function Animal (name) {
+  this.name = name;
 }
 
-Greeter.prototype.hello = function hello () {
+Animal.prototype.hello = function hello () {
   return 'Hello, my name is ' + this.name;
 }
 
-var george = new Greeter('George');
+const mouse = new Animal('mouse');
 
-var msg = george.hello();
+console.log(mouse.hello()); // Hello, my name is mouse
+```
 
-console.log(msg); // Hello, my name is George```
+*ES6 constructor function version:*
+
+```javascript
+class Animal {
+  constructor (name) {
+    this.name = name;
+  }
+  hello () {
+    return `Hello, my name is ${ this.name }`;
+  }
+}
+
+const mouse = new Animal('mouse');
+
+console.log(mouse.hello()); // Hello, my name is mouse
+```
+
+*Factory function and Object.create()*
+
+`Object.create()` is an ES5 feature that was championed by Douglas Crockford so that we could attach delegate prototypes without using constructors and the `new` keyword.
