@@ -95,3 +95,8 @@ console.log(mouse.getPrivateData()); // secret
 ```
 
 This way, we use a closure inside factory function to add a "private variable", in order the produced instance not to be able to have access or change to this private variable. The instance can only get the private variable via a method getPrivateData(), The produced instance will not have a property called secret or privateData, but will have a method getPrivateData().
+
+**Drawbacks**
+
+One major drawback to delegation is that it’s not very good for storing state. If you try to store state as objects or arrays, mutating any member of the object or array will mutate the member for every instance that shares the prototype. In order to preserve instance safety, you need to make a copy of the state for each object. <br />
+So, a good approach is to **store in prototype only shared methods among instances**
