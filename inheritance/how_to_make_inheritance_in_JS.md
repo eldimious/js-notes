@@ -176,3 +176,29 @@ Functional inheritance makes use of a **factory function**, and then tacks on ne
 **Cos of using Concatenative inheritance**
 
 1. Perhaps more slow from Prototype Delegation, as you need to copy each method property for each instance.
+
+
+```js
+const animal = function (secret) {
+  const privateData = secret;
+  const attrs = {};
+
+  return Object.assign(this, {
+    hello(name) {
+      return `Hello, my name is ${ this.name }`;;
+    },
+    set(name, value) {
+      attrs[name] = value;
+    },
+    get (name) {
+      return attrs[name];
+    }
+    getPrivateData() {
+      return privateData;
+    }
+  });
+};
+
+const mouse = animal('secret');
+console.log(mouse.hello('mouse')); // Hello, my name is mouse
+```
