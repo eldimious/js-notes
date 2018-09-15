@@ -16,7 +16,7 @@ In JavaScript, an object may have a **link to a prototype for delegation**. If a
 1. One major drawback to delegation is that it’s **NOT** very good for **storing state**. If you try to store state as *objects or arrays*, mutating any member of the object or array will *mutate the member for every instance that shares the prototype*. In order to preserve instance safety, you need to make a copy of the state for each object. <br />
 So, a good approach is to **store in prototype only shared methods among instances**
 
-## ES5 constructor function version(Function Constructor):
+### ES5 constructor function version(Function Constructor):
 	
 **Pos of using Function Constructor & Class**
 
@@ -46,7 +46,7 @@ console.log(mouse.hello()); // Hello, my name is mouse
 ```
 
 
-## ES6 constructor function version('Class' -> sugar style of Function Constructor): ###
+### ES6 constructor function version('Class' -> sugar style of Function Constructor): ###
 
 **Cos of using Class**
 
@@ -67,7 +67,7 @@ const mouse = new Animal('mouse');
 console.log(mouse.hello()); // Hello, my name is mouse
 ```
 
-## Factory function and Object.create() ###
+### Factory function and Object.create()
 
 `Object.create()` is an ES5 feature that was championed by Douglas Crockford so that we could attach delegate prototypes without using constructors and the `new` keyword.
 
