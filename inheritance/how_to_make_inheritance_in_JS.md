@@ -127,3 +127,28 @@ const mouse = mouseFactory('mouse', 'secret');
 console.log(mouse.hello()); // Hello, my name is mouse
 console.log(mouse.getPrivateData()); // secret
 ```
+
+#Concatenative inheritance(mixins):
+
+Concatenative inheritance is the process of **copying the properties** from one object to another, **without retaining a reference** between the two objects. <br /> 
+This process is commonly achieved using `Object.assign()`. <br /> 
+Concatenative inheritance is possible because of a feature in JavaScript known as dynamic object extension: the ability to add to an object after it has been instantiated.
+So, using concatenative inheritance, you just copy properties from an exemplar object to a new instance, without retaining a reference among them.
+
+
+```js
+const animal = {
+  hello() {
+    return `Hello, my name is ${ this.name }`;
+  }
+};
+
+const mouse = Object.assign({}, 
+  animal,
+  {
+    name: 'mouse',
+  }
+);
+
+console.log(mouse.hello()); // Hello, my name is mouse
+```
