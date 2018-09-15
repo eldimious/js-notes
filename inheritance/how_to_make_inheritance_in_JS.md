@@ -161,3 +161,18 @@ const mouse = Object.assign({},
 
 console.log(mouse.hello()); // Hello, my name is mouse
 ```
+
+# Functional Inheritance
+
+Coined by Douglas Crockford in “JavaScript: The Good Parts”. In JavaScript, any function can create an object. When that function is not a constructor (or `class`), it’s called a factory function. <br /> 
+Functional inheritance makes use of a **factory function**, and then tacks on new properties **using concatenative inheritance**. So it works by **producing an object from a factory**, and **extending the produced object by assigning properties to it directly (using concatenative inheritance-> Object.assign)**.Functions created for the purpose of extending existing objects are commonly referred to as functional mixins
+
+**Pos of using Concatenative inheritance**
+
+1. Allows you to use the function **closure** to encapsulate **private data**. In other words, you can enforce private state.
+
+2. Compibing it with concatenative inheritance(Object.assign), we can **store states** as we copy properties from an exemplar object to a new instance, without retaining a reference among them.
+
+**Cos of using Concatenative inheritance**
+
+1. Perhaps more slow from Prototype Delegation, as you need to copy each method property for each instance.
