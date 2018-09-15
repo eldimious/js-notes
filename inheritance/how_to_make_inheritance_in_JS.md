@@ -2,8 +2,17 @@ One of JavaScript its best features is the ability to create and inherit from ob
 
 
 # Prototype Delegation
-A prototype is a **working object instance**. Objects inherit directly from other objects.
-In JavaScript, an object may have a link to a prototype for delegation. If a property is **not found on** the object, the lookup is delegated to the delegate prototype. So using, delegate prototypes (setting the prototype of one instance to refer to an examplar object), it’s literally **Objects Linking to Other Objects**, or OLOO, as Kyle Simpson calls it
+A prototype is a **working object instance**. Objects inherit directly from other objects. So in prototypal inheritance, instances inherit from other instances. Using delegate prototypes we are setting the prototype of one instance to refer to an examplar object.<br />
+In JavaScript, an object may have a **link to a prototype for delegation**. If a property is **not found on** the object, the lookup is delegated to the delegate prototype. So using, delegate prototypes (setting the prototype of one instance to refer to an examplar object), it’s literally **Objects Linking to Other Objects**, or OLOO, as Kyle Simpson calls it
+
+**Pos of using Prototype Delegation**
+
+1. Micro-optimization performance benefit. Method delegation can preserve memory resources because you only need one copy of each method to be shared by all instances.
+
+**Cos of using Prototype Delegation**
+
+1. One major drawback to delegation is that it’s **NOT** very good for **storing state**. If you try to store state as *objects or arrays*, mutating any member of the object or array will *mutate the member for every instance that shares the prototype*. In order to preserve instance safety, you need to make a copy of the state for each object. <br />
+So, a good approach is to **store in prototype only shared methods among instances**
 
 ## ES5 constructor function version(Function Constructor):
 	
@@ -11,7 +20,7 @@ In JavaScript, an object may have a link to a prototype for delegation. If a pro
 
 1. *this* refers to the new object.
 
-2. micro-optimization performance benefit
+2. Micro-optimization performance benefit
 
 **Cos of using Function Constructor & Class**
 
@@ -91,8 +100,9 @@ const mouse = mouseFactory('mouse');
 console.log(mouse.hello()); // Hello, my name is mouse
 ```
 
-OR example with private data:
+**OR example with private data:**
 
+This way, we use a closure inside factory function to add a "private variable", in order the produced instance not to be able to have access or change to this private variable. The instance can only get the private variable via a method getPrivateData(), The produced instance will not have a property called secret or privateData, but will have a method getPrivateData().
 
 ```javascript
 
@@ -117,10 +127,3 @@ const mouse = mouseFactory('mouse', 'secret');
 console.log(mouse.hello()); // Hello, my name is mouse
 console.log(mouse.getPrivateData()); // secret
 ```
-
-This way, we use a closure inside factory function to add a "private variable", in order the produced instance not to be able to have access or change to this private variable. The instance can only get the private variable via a method getPrivateData(), The produced instance will not have a property called secret or privateData, but will have a method getPrivateData().
-
-**Drawbacks**
-
-One major drawback to delegation is that it’s not very good for storing state. If you try to store state as objects or arrays, mutating any member of the object or array will mutate the member for every instance that shares the prototype. In order to preserve instance safety, you need to make a copy of the state for each object. <br />
-So, a good approach is to **store in prototype only shared methods among instances**
