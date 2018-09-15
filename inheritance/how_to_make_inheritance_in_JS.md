@@ -130,7 +130,7 @@ console.log(mouse.hello()); // Hello, my name is mouse
 console.log(mouse.getPrivateData()); // secret
 ```
 
-#Concatenative inheritance(mixins):
+# Concatenative inheritance(mixins):
 
 Concatenative inheritance is the process of **copying the properties** from one object to another, **without retaining a reference** between the two objects. <br /> 
 This process is commonly achieved using `Object.assign()`.It will copy all of the enumerable own properties by assignment from the source objects to the destination objects with last in priority.  <br /> 
