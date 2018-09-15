@@ -9,6 +9,8 @@ In JavaScript, an object may have a **link to a prototype for delegation**. If a
 
 1. Micro-optimization performance benefit. Method delegation can preserve memory resources because you only need one copy of each method to be shared by all instances.
 
+2. Really good to store public/shared methods on a shared prototype. Thats way, you have just one copy
+
 **Cos of using Prototype Delegation**
 
 1. One major drawback to delegation is that it’s **NOT** very good for **storing state**. If you try to store state as *objects or arrays*, mutating any member of the object or array will *mutate the member for every instance that shares the prototype*. In order to preserve instance safety, you need to make a copy of the state for each object. <br />
@@ -131,10 +133,17 @@ console.log(mouse.getPrivateData()); // secret
 #Concatenative inheritance(mixins):
 
 Concatenative inheritance is the process of **copying the properties** from one object to another, **without retaining a reference** between the two objects. <br /> 
-This process is commonly achieved using `Object.assign()`. <br /> 
+This process is commonly achieved using `Object.assign()`.It will copy all of the enumerable own properties by assignment from the source objects to the destination objects with last in priority.  <br /> 
 Concatenative inheritance is possible because of a feature in JavaScript known as dynamic object extension: the ability to add to an object after it has been instantiated.
 So, using concatenative inheritance, you just copy properties from an exemplar object to a new instance, without retaining a reference among them.
 
+**Pos of using Concatenative inheritance**
+
+1. Is really good to save states as the instances and the "source" object and the instances among them do not retain a reference. So for example if the state is an object/array and we mutate an object value **will NOT affect  the other instances**. 
+
+**Cos of using Concatenative inheritance**
+
+1. Perhaps more slow from Prototype Delegation, as you need to copy each method property for each instance.
 
 ```js
 const animal = {
