@@ -1,7 +1,7 @@
 One of JavaScript best features is the ability to create and inherit from objects **without classes and class inheritance**. Its a **combination** of **delegate prototypes, runtime object extension, and closures** which allows you to express three distinct kinds of prototypes in JavaScript, which provide significant advantages over classical inheritance.
 
 
-# Prototype Delegation
+# A) Prototype Delegation
 A prototype is a **working object instance**. Objects inherit directly from other objects. So in prototypal inheritance, instances inherit from other instances. Using delegate prototypes we are setting the prototype of one instance to refer to an examplar object.<br />
 In JavaScript, an object may have a **link to a prototype for delegation**. If a property is **not found on** the object, the lookup is delegated to the delegate prototype. So using, delegate prototypes (setting the prototype of one instance to refer to an examplar object), it’s literally **Objects Linking to Other Objects**, or OLOO, as Kyle Simpson calls it
 
@@ -146,7 +146,7 @@ console.log(mouse.hello()); // Hello, my name is mouse
 console.log(mouse.getPrivateData()); // secret
 ```
 
-# Concatenative inheritance(mixins):
+# B) Concatenative inheritance(mixins):
 
 Concatenative inheritance is the process of **copying the properties** from one object to another, **without retaining a reference** between the two objects. <br /> 
 This process is commonly achieved using `Object.assign()`.It will copy all of the enumerable own properties by assignment from the source objects to the destination objects with last in priority.  <br /> 
@@ -178,7 +178,7 @@ const mouse = Object.assign({},
 console.log(mouse.hello()); // Hello, my name is mouse
 ```
 
-# Functional Inheritance
+# C) Functional Inheritance
 
 Coined by Douglas Crockford in “JavaScript: The Good Parts”. In JavaScript, any function can create an object. When that function is not a constructor (or `class`), it’s called a factory function. <br /> 
 Functional inheritance makes use of a **factory function**, and then tacks on new properties **using concatenative inheritance**. So it works by **producing an object from a factory**, and **extending the produced object by assigning properties to it directly (using concatenative inheritance-> Object.assign)**.Functions created for the purpose of extending existing objects are commonly referred to as functional mixins
