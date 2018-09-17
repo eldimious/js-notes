@@ -3,18 +3,18 @@ One of JavaScript best features is the ability to create and inherit from object
 
 # A) Prototype Delegation
 A prototype is a **working object instance**. Objects inherit directly from other objects. So in prototypal inheritance, instances inherit from other instances. Using delegate prototypes we are setting the prototype of one instance to refer to an examplar object.<br />
-In JavaScript, an object may have a **link to a prototype for delegation**. If a property is **not found on** the object, the lookup is delegated to the delegate prototype. So using, delegate prototypes (setting the prototype of one instance to refer to an examplar object), it’s literally **Objects Linking to Other Objects**, or OLOO, as Kyle Simpson calls it.<br />
+In JavaScript, an object may have a **link to a prototype for delegation**. If a property is **not found on** the object, the lookup is delegated to the delegate prototype, which may have a link to its own delegate prototype, and so on up the chain until you arrive at `Object.prototype`, which is the root delegate. So using, delegate prototypes (setting the prototype of one instance to refer to an examplar object), it’s literally **Objects Linking to Other Objects**, or OLOO, as Kyle Simpson calls it.<br />
 We can achieve a prototype delegation using: <br />
 
-1. ES5 constructor function
+1. ES5 constructor function.
 
-2. ES6 class(sugar style of constructor function)
+2. ES6 class(sugar style of constructor function).
 
-3. Function factory using Object.create()
+3. Function factory using Object.create().
 
 **Pos of using Prototype Delegation**
 
-1. Micro-optimization performance benefit. Method delegation can preserve memory resources because you only need one copy of each method to be shared by all instances.
+1. Micro-optimization performance benefit. Method delegation can  **preserve memory resources** because you only need one copy of each method to be shared by all instances.
 
 2. Really good to **store public/shared methods** on a shared prototype. Thats way, you have just one copy shared among all instances. If you add a method in prototype, it will affect all the instances.
 
@@ -77,7 +77,9 @@ console.log(mouse.hello()); // Hello, my name is mouse
 
 **Cos of using Class**
 
-1. Temptation for users to create problematic class hierarchies using the extends keyword. Drive to the fragile base class problem, the gorilla banana problem, the duplication by necessity problem, 
+1. Temptation for users to create problematic class hierarchies using the extends keyword. Drive to the fragile base class problem, the gorilla banana problem, the duplication by necessity problem. "You wanted a banana but what you got was a gorilla holding the banana and the entire jungle.” ~ Joe Armstrong
+
+2. The Tight Coupling Problem: The coupling between a child class and its parent is the tightest form of coupling in OO design. That’s the opposite of reusable, modular code.
 
 ```javascript
 class Animal {
@@ -100,7 +102,7 @@ console.log(mouse.hello()); // Hello, my name is mouse
 
 **Pos of Using Factories**
 
-1. there is not any need of new constructor. No new neeeded. There’s no risk of using it in the “wrong” way as it does not require `new`, so there is not any risk of pollute the global namespace.
+1. There is not any need of `new` constructor. No new neeeded. There’s no risk of using it in the “wrong” way as it does not require `new`, so there is not any risk of pollute the global namespace.
 
 2. `this` behaves as it normally would, so you can use it to access the parent object. 
 
@@ -204,7 +206,7 @@ Functional inheritance makes use of a **factory function**, and then tacks on ne
 
 **Cos of using Concatenative inheritance**
 
-1. Perhaps more slow from Prototype Delegation, as you need to copy each method property for each instance.
+1. Perhaps more slow from Prototype Delegation, as you need to copy each method property for each instance. If you’re creating a hundreds of thousands of objects and you need your app to perform smoothly at or near realtime (think game engines, realtime signal processors etc), delegating calls to methods(adding shared methods in a prototype obj) can save you from a lot of manual memory management.
 
 
 ```js
@@ -231,3 +233,11 @@ const animal = function (secret) {
 const mouse = animal('secret');
 console.log(mouse.hello('mouse')); // Hello, my name is mouse
 ```
+
+Conclusions:
+
+1. No need of using classes in JavaScript.
+
+2. Avoid `new` constructor. We can use Object.create() to inherit from prototype.
+
+3. With dynamic object extension(`Object.assign` for states), object literals and `Object.create()`(for shared methods), we have everything we need. And `this` behaves just like it does in any other function.
