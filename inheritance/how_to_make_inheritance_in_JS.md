@@ -3,7 +3,14 @@ One of JavaScript best features is the ability to create and inherit from object
 
 # A) Prototype Delegation
 A prototype is a **working object instance**. Objects inherit directly from other objects. So in prototypal inheritance, instances inherit from other instances. Using delegate prototypes we are setting the prototype of one instance to refer to an examplar object.<br />
-In JavaScript, an object may have a **link to a prototype for delegation**. If a property is **not found on** the object, the lookup is delegated to the delegate prototype. So using, delegate prototypes (setting the prototype of one instance to refer to an examplar object), it’s literally **Objects Linking to Other Objects**, or OLOO, as Kyle Simpson calls it
+In JavaScript, an object may have a **link to a prototype for delegation**. If a property is **not found on** the object, the lookup is delegated to the delegate prototype. So using, delegate prototypes (setting the prototype of one instance to refer to an examplar object), it’s literally **Objects Linking to Other Objects**, or OLOO, as Kyle Simpson calls it.<br />
+We can achieve a prototype delegation using: <br />
+
+1. ES5 constructor function
+
+2. ES6 class(sugar style of constructor function)
+
+3. Function factory using Object.create()
 
 **Pos of using Prototype Delegation**
 
@@ -47,6 +54,10 @@ Object.assign(Object.create(protoObj),
 2. *Constructors violate the open/closed principle* because they couple all callers to the details of how your object gets instantiated.
 
 3. *Constructors break the Open / Closed Principle*. API should be open for extension, but closed for modification.
+
+4. Using Constructors Enables the Deceptive `instanceof`.  instanceof does an identity check comparing the object’s `[[Prototype]]` object to the `Constructor.prototype` property.
+
+
 ```javascript
 function Animal (name) {
   this.name = name;
@@ -89,11 +100,13 @@ console.log(mouse.hello()); // Hello, my name is mouse
 
 **Pos of Using Factories**
 
-1. there is not any need of new constructor. No new neeeded.
+1. there is not any need of new constructor. No new neeeded. There’s no risk of using it in the “wrong” way as it does not require `new`, so there is not any risk of pollute the global namespace.
 
 2. `this` behaves as it normally would, so you can use it to access the parent object. 
 
 3. Can create a closure inside function factory for data privacy. Closures are a common pattern in JavaScript, and they’re commonly used for data privacy.
+
+4.  The prototype property isn’t used(for example mouse.prototype = Animal;), so there will be no instanceof link between the function and the objects it creates. It is simply a function that happens to create objects.
 
 **Cos of Using Factories**
 
