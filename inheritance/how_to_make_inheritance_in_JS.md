@@ -1,4 +1,4 @@
-One of JavaScript its best features is the ability to create and inherit from objects without classes and class inheritance. Its a **combination** of **delegate prototypes, runtime object extension, and closures** which allows you to express three distinct kinds of prototypes in JavaScript, which provide significant advantages over classical inheritance.
+One of JavaScript best features is the ability to create and inherit from objects **without classes and class inheritance**. Its a **combination** of **delegate prototypes, runtime object extension, and closures** which allows you to express three distinct kinds of prototypes in JavaScript, which provide significant advantages over classical inheritance.
 
 
 # Prototype Delegation
@@ -9,12 +9,28 @@ In JavaScript, an object may have a **link to a prototype for delegation**. If a
 
 1. Micro-optimization performance benefit. Method delegation can preserve memory resources because you only need one copy of each method to be shared by all instances.
 
-2. Really good to store public/shared methods on a shared prototype. Thats way, you have just one copy
+2. Really good to **store public/shared methods** on a shared prototype. Thats way, you have just one copy shared among all instances. If you add a method in prototype, it will affect all the instances.
+
 
 **Cos of using Prototype Delegation**
 
-1. One major drawback to delegation is that it’s **NOT** very good for **storing state**. If you try to store state as *objects or arrays*, mutating any member of the object or array will *mutate the member for every instance that shares the prototype*. In order to preserve instance safety, you need to make a copy of the state for each object. <br />
-So, a good approach is to **store in prototype only shared methods among instances**
+1. One major drawback to delegation is that it’s **NOT** very good for **storing states**(properties). If you try to store state as *objects or arrays*, mutating any member of the object or array will *mutate the member for every instance that shares the prototype*. In order to preserve instance safety, you need to make a copy of the state for each object. In order to preserve instance safety, you need to make a copy of the state for each object. <br />
+So, a good approach is to **store in prototype only shared methods among instances** and use the Concatenative inheritance(mixins), using for example Object.assign, to store states for each instance.<br />
+
+```js
+Object.assign(Object.create(protoObj),
+  // here we can store states with safety as the instances and the "source" 
+  // object and the instances among them do not retain a reference.
+  // So, changing user.surname will affect only the current instance, and 
+  // not the other ones.
+  {
+    user: {
+      surname: surname,
+    }
+  }
+);
+```
+
 
 ### ES5 constructor function version(Function Constructor):
 	
