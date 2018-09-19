@@ -49,3 +49,13 @@ console.log(cat.info); // -> {name: "perseas", surname: "nasikas"}
 console.log(mouse.hello()); // -> Hello, my name is micky
 console.log(cat.hello()) // -> Hello, my name is perseas
 ```
+
+#### we will mutate state object(info) in an instance to see if this will affect the other one.
+
+```js
+mouse.info.name = 'mutated';
+console.log(mouse.info); // -> {name: "mutated", surname: "mouse"}
+console.log(cat.info); // -> {name: "perseas", surname: "nasikas"}
+```
+
+As we can see mutating any member of the object or array does NOT affect the other instances, because we use **Object.assign()** to save states, so it copis all of the enumerable own properties by assignment from the source objects to the destination objects with last in priority and the the **instances do not retain a reference.**
