@@ -12,7 +12,7 @@ In this section we will try to combine the 3 ways of making inheritance in JS. S
 ```js
 const animal = {
   hello() {
-    return `Hello, my name is ${ this.name }`;
+    return `Hello, my name is ${ this.info.name }`;
   }
 };
 
@@ -39,4 +39,13 @@ const mouseFactory = function mouseFactory(info, secret) {
 
 const mouse = mouseFactory({ name: 'micky', surname: 'mouse'}, 'disney');
 const cat = mouseFactory({ name: 'perseas', surname: 'nasikas'}, 'pet');
+```
+
+```js
+console.log('mouse', mouse);
+console.log('cat', cat);
+console.log(mouse.info); // -> { name: 'micky', surname: 'mouse'}
+console.log(cat.info); // -> {name: "perseas", surname: "nasikas"}
+console.log(mouse.hello()); // -> Hello, my name is micky
+console.log(cat.hello()) // -> Hello, my name is perseas
 ```
