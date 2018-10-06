@@ -54,5 +54,5 @@ async function asyncFunc() {
 }
 ```
 
-####Conclusion 1: 
-**An Async functions always return Promises**. The async keyword  declares that the asyncFunc() function return value is guaranteed **to be a promise**, so that callers can call asyncFunc().then(...) or await asyncFunc() safely. 
+#### Conclusion 1: 
+**An Async functions always return Promises**. The async keyword  declares that the asyncFunc() function return value is guaranteed **to be a promise**, so that callers can call asyncFunc().then(...) or await asyncFunc() safely. So when we use `async` keyword we create an **asynchronous functions that always return a Promise**. This asyncFunc function will now return a Promise, even if it’s only doing synchronous logic.
