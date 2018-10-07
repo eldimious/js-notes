@@ -36,7 +36,7 @@ async function foo() {
 
 Let's say that we have an array of items and we want for each element run a promise function:
 
- - *Solution 1:*
+ - *Solution 1 (Native):*
 
 ```js
 const arr = [1, 2, 3, 4, 5];
@@ -46,15 +46,15 @@ async function asyncFunc(item) {
 }
 
 (async() => {
-  const results = await Promise.all(arr.map(async (user) => {
-    const res = await asyncFunc(user);
+  const results = await Promise.all(arr.map(async (item) => {
+    const res = await asyncFunc(item);
     return res;
   }));
   console.log('results', results); // Output: [1, 2, 3, 4, 5]
 })();
 ```
 
- - *Solution 2:*
+ - *Solution 2 (Bluebird):*
 
 There is another solution for it if you are not using native Promises but `Bluebird`. You could also try using `Promise.map()`, which is mixing the array.map and Promise.all
 
@@ -67,8 +67,8 @@ async function asyncFunc(item) {
 }
 
 (async() => {
-  const results = await Promise.map(async (user) => {
-    const res = await asyncFunc(user);
+  const results = await Promise.map(async (item) => {
+    const res = await asyncFunc(item);
     return res;
   });
   console.log('results', results); // Output: [1, 2, 3, 4, 5]
@@ -87,3 +87,24 @@ async function foo() {
 ```
 
 #### A) Iterate over array:
+
+- *Solution 1 (Native):*
+
+```js
+const arr = [1, 2, 3, 4, 5];
+
+async function asyncFunc(item) {
+  return item;
+}
+(async() => {
+  const results = await arr.reduce(async (promise, item) => {
+    // This line will wait for the last async function to finish.
+    // The first iteration uses an already resolved Promise
+    // so, it will immediately continue.
+    const accumulator = await promise;
+    const result = await asyncFunc(item)
+    return [...accumulator, result]
+  }, Promise.resolve([]));    
+  console.log('results', results); // Output: [1, 2, 3, 4, 5]
+})()
+```
