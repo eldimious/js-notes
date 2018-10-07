@@ -1,3 +1,5 @@
+# Loops
+
 The following code make two asynchronous function calls, asyncFunc1() and asyncFunc2().
 
 ```js
