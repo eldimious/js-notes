@@ -133,6 +133,19 @@ The catched error is exactly the rejected value. After we caught the exception, 
 
  - Reject it, like return Promise.reject(error). This is equivalent to throw error. `catch (err) { return Promise.reject(err) }`
 
+#### B) Using .catch
+
+As we declare before the functionality of await is to wait for a promise to be fulfilled or rejected. That's why we can handle the `await otherAsyncFunc` as a Promise using `then` or `catch` method (as an async function **always returns a Promise**). So we can write error handling like this:
+
+```js
+function asyncFunc() {
+    const result = await otherAsyncFunc()
+        .catch((error) => { console.log(error); });
+}
+```
+
+Of course after we caught the exception in `.catch` method we can use the above way to deal it.
+
 ## How it works
 
  - There are Async Functions. These are declared by prepending the word async in their declaration: `async function asyncFunc() {....}`
