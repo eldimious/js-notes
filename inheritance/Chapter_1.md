@@ -1,4 +1,6 @@
-One of JavaScript best features is the ability to create and inherit from objects **without classes and class inheritance**. Its a **combination** of **delegate prototypes, runtime object extension, and closures** which allows you to express three distinct kinds of prototypes in JavaScript, which provide significant advantages over classical inheritance.
+# Introduction
+
+One of JavaScript best features is the ability to create and inherit from objects **without classes and class inheritance**. Its a **combination** of **delegate prototypes, runtime object extension, and closures** which allows you to express three distinct kinds of prototypes in JavaScript, which provide significant advantages over classical inheritance. In this chapter we will discover the *ways we can use to implement inheritance in JS*.
 
 
 # A) Prototype Delegation
