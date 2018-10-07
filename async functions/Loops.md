@@ -38,10 +38,16 @@ Let's say that we have an array of items and we want for each element run a prom
 
 ```js
 const arr = [1, 2, 3, 4, 5];
-const results = [];
 
-const results = await Promise.all(arr.map(async (item) => {
-    const await asyncFunc(item);
-    return item + 1;
-}));
+async function asyncFunc(item) {
+    return item;
+}
+
+(async() => {
+  const results = await Promise.all(arr.map(async (user) => {
+    const res = await asyncFunc(user)
+    return res
+  }));
+  console.log('results', results) // Output: [1, 2, 3, 4, 5]
+})();
 ```
