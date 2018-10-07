@@ -107,5 +107,20 @@ function asyncFunc() {
 }
 ```
 
+## How it works
+
+ - There are Async Functions. These are declared by prepending the word async in their declaration: `async function asyncFunc() {....}`
+
+ - An Async function always returns Promises.
+
+ - Your code can be "paused" waiting for an Async Function with await
+
+ - await returns whatever the async function returns when it is done. It will return result if Promise is fulfilled or will throw an error if Promise is rejected.
+
+ - await can only be used *inside* an async function. If you try to use await operator outside of an async function you will get Error.
+
+ - If an Async Function throws an exception, the exception will bubble up to the parent functions just like in normal
+  Javascript, and can be caught with try/catch or we can add .catch() method directly in `await asyncFunc.catch(error => { })` just like in Promises.
+
 #### Conclusion 1: 
 **An Async function always returns Promises**, whether you use await or not. That promise resolves with whatever the async function returns, or rejects with whatever the async function throws. The async keyword  declares that the asyncFunc() function returns value which is guaranteed **to be a promise**, so that callers can call asyncFunc().then(...) or await asyncFunc() safely. So when we use `async` keyword we create an **asynchronous functions that always return a Promise**. This asyncFunc function will now return a Promise, even if it’s only doing synchronous logic.
