@@ -65,18 +65,44 @@ The await keyword is used to handle Promises inside the async function. So, hand
 
  - If the Promise is rejected, await throws the rejection value.
 
+**Promise is fulfilled:**
+
 ```js
 async function asyncFunc() {
     const result = await otherAsyncFunc();
     console.log(result);
 }
 ```
+
 ```js
 // Equivalent to:
 function asyncFunc() {
     return otherAsyncFunc()
     .then(result => {
         console.log(result);
+    });
+}
+```
+
+**Promise is rejected:**
+
+
+```js
+async function asyncFunc() {
+    try {
+        await otherAsyncFunc();
+    } catch (err) {
+        console.error(err);
+    }
+}
+```
+
+```js
+// Equivalent to:
+function asyncFunc() {
+    return otherAsyncFunc()
+    .catch(err => {
+        console.error(err);
     });
 }
 ```
