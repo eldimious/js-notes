@@ -36,6 +36,8 @@ async function foo() {
 
 Let's say that we have an array of items and we want for each element run a promise function:
 
+ - *Solution 1:*
+
 ```js
 const arr = [1, 2, 3, 4, 5];
 
@@ -45,9 +47,30 @@ async function asyncFunc(item) {
 
 (async() => {
   const results = await Promise.all(arr.map(async (user) => {
-    const res = await asyncFunc(user)
-    return res
+    const res = await asyncFunc(user);
+    return res;
   }));
-  console.log('results', results) // Output: [1, 2, 3, 4, 5]
+  console.log('results', results); // Output: [1, 2, 3, 4, 5]
+})();
+```
+
+ - *Solution 2:*
+
+There is another solution for it if you are not using native Promises but `Bluebird`. You could also try using `Promise.map()`, which is mixing the array.map and Promise.all
+
+```js
+const Promise = require('Bluebird')
+const arr = [1, 2, 3, 4, 5];
+
+async function asyncFunc(item) {
+    return item;
+}
+
+(async() => {
+  const results = await Promise.map(async (user) => {
+    const res = await asyncFunc(user);
+    return res;
+  });
+  console.log('results', results); // Output: [1, 2, 3, 4, 5]
 })();
 ```
