@@ -74,3 +74,16 @@ async function asyncFunc(item) {
   console.log('results', results); // Output: [1, 2, 3, 4, 5]
 })();
 ```
+
+## Sequential operation:
+
+#### A) Call different functions:
+
+```js
+async function foo() {
+    const result1 = await asyncFunc1();
+    const result2 = await asyncFunc2();
+}
+```
+
+#### A) Iterate over array:
