@@ -18,9 +18,9 @@ Notice that asyncFunc2() does not depend on the result of asyncFunc1() and in fa
 
 ## Parallel operation:
 
-#### A) Iterate on array of promises:
+#### A) Iterate over array of promises:
 
-We can use Promise.all() to do so:
+We can use Promise.all() to do it. Instead of awaiting two Promises, we are now awaiting a Promise for an Array with two elements.
 
 ```js
 
@@ -30,4 +30,18 @@ async function foo() {
         asyncFunc2(),
     ]);
 }
+```
+
+#### B) Iterate over array:
+
+Let's say that we have an array of items and we want for each element run a promise function:
+
+```js
+const arr = [1, 2, 3, 4, 5];
+const results = [];
+
+const results = await Promise.all(arr.map(async (item) => {
+    const await asyncFunc(item);
+    return item + 1;
+}));
 ```
