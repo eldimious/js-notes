@@ -1,12 +1,14 @@
 # Introduction
 
+## Async function always return Promises 
+
 Async functions allow you to write promise-based code as if it were synchronous, but without blocking the main thread. Async functions work like this:
 
 A) Fulfilling the Promise of an async function:
 
 ```js
 async function asyncFunc() {
-    return 123;
+    return 'result';
 }
 ```
 
@@ -14,7 +16,7 @@ which is equivalent to:
 
 ```js
 function asyncFunc() {
-    return Promise.resolve(123);
+    return Promise.resolve('result');
 }
 ```
 or
@@ -22,7 +24,7 @@ or
 ```js
 function asyncFunc() {
     return new Promise((resolve, reject) => {
-    	return resolve(123);
+    	return resolve('result');
    	})
 }
 ```
@@ -55,4 +57,29 @@ async function asyncFunc() {
 ```
 
 #### Conclusion 1: 
-**An Async functions always return Promises**. The async keyword  declares that the asyncFunc() function return value is guaranteed **to be a promise**, so that callers can call asyncFunc().then(...) or await asyncFunc() safely. So when we use `async` keyword we create an **asynchronous functions that always return a Promise**. This asyncFunc function will now return a Promise, even if it’s only doing synchronous logic.
+**An Async function always returns Promises**. The async keyword  declares that the asyncFunc() function returns value which is guaranteed **to be a promise**, so that callers can call asyncFunc().then(...) or await asyncFunc() safely. So when we use `async` keyword we create an **asynchronous functions that always return a Promise**. This asyncFunc function will now return a Promise, even if it’s only doing synchronous logic.
+
+
+## await operator
+
+The await keyword is used to handle Promises inside the async function. So, handling **results and errors** of asynchronous computations takes place via `await`. The operator await (which is only allowed inside async functions) waits for its operand, a Promise, to be settled: It ‘pauses’ the function until fetchUsers is done, and returns the result. The operator await (which is only allowed inside async functions) waits for its operand, a Promise, to be settled (‘pauses’ the function until asyncFunc is fulfilled/rejected, and returns the result/error):
+
+ - If the Promise is fulfilled, the result of await is the fulfillment value.
+
+ - If the Promise is rejected, await throws the rejection value.
+
+```js
+async function asyncFunc() {
+    const result = await otherAsyncFunc();
+    console.log(result);
+}
+```
+```js
+// Equivalent to:
+function asyncFunc() {
+    return otherAsyncFunc()
+    .then(result => {
+        console.log(result);
+    });
+}
+```
