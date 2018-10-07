@@ -107,6 +107,32 @@ function asyncFunc() {
 }
 ```
 
+## Error Handling
+
+With promises, an async function have two possible return values: resolved value, and rejected value. And we can use .then() for normal case and .catch() for exceptional case. Let's see how we handle errors in async functions:
+
+#### A) try…catch statement
+
+The most standard way is to use `try...catch` statement. When await a call, any rejected value will be thrown as an exception. Here is an example:
+
+```js
+async function asyncFunc() {
+    try {
+        await otherAsyncFunc();
+    } catch (err) {
+        console.error(err);
+    }
+}
+```
+
+The catched error is exactly the rejected value. After we caught the exception, we have **several ways to deal** in catch(err) {..} block with it:
+
+ - Handle the exception, and return a normal value. (Not using any return statement in the catch block is equivalent to using return undefined; and is a normal value as well.) `catch(err) { return 'fail' }`
+
+ - Throw it (err), if you want the caller to handle it. `catch (err) { throw err }`
+
+ - Reject it, like return Promise.reject(error). This is equivalent to throw error. `catch (err) { return Promise.reject(err) }`
+
 ## How it works
 
  - There are Async Functions. These are declared by prepending the word async in their declaration: `async function asyncFunc() {....}`
