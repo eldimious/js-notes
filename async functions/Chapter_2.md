@@ -27,10 +27,10 @@ We can use Promise.all() to do it. Instead of awaiting two Promises, we are now 
 ```js
 
 async function foo() {
-    const [result1, result2] = await Promise.all([
-        asyncFunc1(),
-        asyncFunc2(),
-    ]);
+  const [result1, result2] = await Promise.all([
+    asyncFunc1(),
+    asyncFunc2(),
+  ]);
 }
 ```
 
@@ -44,7 +44,7 @@ Let's say that we have an array of items and we want for each element run a prom
 const arr = [1, 2, 3, 4, 5];
 
 async function asyncFunc(item) {
-    return item;
+  return item;
 }
 
 (async() => {
@@ -65,7 +65,7 @@ const Promise = require('Bluebird')
 const arr = [1, 2, 3, 4, 5];
 
 async function asyncFunc(item) {
-    return item;
+  return item;
 }
 
 (async() => {
@@ -83,8 +83,8 @@ async function asyncFunc(item) {
 
 ```js
 async function foo() {
-    const result1 = await asyncFunc1();
-    const result2 = await asyncFunc2();
+  const result1 = await asyncFunc1();
+  const result2 = await asyncFunc2();
 }
 ```
 
@@ -108,5 +108,5 @@ async function asyncFunc(item) {
     return [...accumulator, result]
   }, Promise.resolve([]));    
   console.log('results', results); // Output: [1, 2, 3, 4, 5]
-})()
+})();
 ```

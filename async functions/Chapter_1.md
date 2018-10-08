@@ -25,7 +25,7 @@ or
 function asyncFunc() {
     return new Promise((resolve, reject) => {
         return resolve('result');
-    })
+    });
 }
 ```
 
@@ -52,7 +52,7 @@ which is equivalent to:
 async function asyncFunc() {
     return new Promise((resolve, reject) => {
         return reject(new Error('We have error!'));
-    })
+    });
 }
 ```
 
@@ -101,9 +101,9 @@ async function asyncFunc() {
 // Equivalent to:
 function asyncFunc() {
     return otherAsyncFunc()
-    .catch(err => {
-        console.error(err);
-    });
+        .catch(err => {
+            console.error(err);
+        });
 }
 ```
 
