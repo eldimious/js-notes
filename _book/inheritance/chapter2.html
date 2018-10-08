@@ -1,0 +1,396 @@
+
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Chapter 2 · JS Notes</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Dimosthenis Botsaris, Alexandros Koufatzis">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="chapter1.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../async-functions/">
+            
+                <a href="../async-functions/">
+            
+                    
+                    Async Functions
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../async-functions/chapter1.html">
+            
+                <a href="../async-functions/chapter1.html">
+            
+                    
+                    Chapter 1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../async-functions/chapter2.html">
+            
+                <a href="../async-functions/chapter2.html">
+            
+                    
+                    Chapter 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Inheritance
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="chapter1.html">
+            
+                <a href="chapter1.html">
+            
+                    
+                    Chapter 1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.2" data-path="chapter2.html">
+            
+                <a href="chapter2.html">
+            
+                    
+                    Chapter 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Chapter 2</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="best-practice-in-inheritance">Best practice in inheritance</h1>
+<p>In this section we will try to combine the 3 ways of making inheritance in JS. So we will mix:</p>
+<ol>
+<li><p><strong>Prototype Delegation</strong>: </p>
+<ul>
+<li>best for shared methods. </li>
+<li>best in memory consumption.</li>
+</ul>
+</li>
+<li><p><strong>Concatenative inheritance(mixins)</strong>:</p>
+<ul>
+<li>best for saving states using Object.assign.</li>
+</ul>
+</li>
+<li><p><strong>Functional Inheritance</strong>:</p>
+<ul>
+<li>best for encapsulating private data using closures.</li>
+</ul>
+</li>
+</ol>
+<h3 id="example">Example:</h3>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> animal = {
+  hello() {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello, my name is <span class="hljs-subst">${ this.info.name }</span>`</span>;
+  }
+};
+
+<span class="hljs-keyword">const</span> mouseFactory = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mouseFactory</span>(<span class="hljs-params">info, secret</span>) </span>{
+  <span class="hljs-comment">// closure to handle private data</span>
+  <span class="hljs-keyword">const</span> privateData = secret;
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign(<span class="hljs-built_in">Object</span>.create(animal),
+    <span class="hljs-comment">// here we can store states with safety as the instances and the </span>
+    <span class="hljs-comment">// &quot;source&quot; </span>
+    <span class="hljs-comment">// object and the instances among them do not retain a reference.</span>
+    <span class="hljs-comment">// So, changing user.surname will affect only the current instance, and </span>
+    <span class="hljs-comment">// not the other ones.</span>
+    {
+      info: {
+        name: info.name,
+        surname: info.surname,
+      },
+      getPrivateData() {
+        <span class="hljs-keyword">return</span> privateData;
+      }
+    }
+  )
+};
+
+<span class="hljs-keyword">const</span> mouse = mouseFactory({ name: <span class="hljs-string">&apos;micky&apos;</span>, surname: <span class="hljs-string">&apos;mouse&apos;</span>}, <span class="hljs-string">&apos;disney&apos;</span>);
+<span class="hljs-keyword">const</span> cat = mouseFactory({ name: <span class="hljs-string">&apos;perseas&apos;</span>, surname: <span class="hljs-string">&apos;nasikas&apos;</span>}, <span class="hljs-string">&apos;pet&apos;</span>);
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;mouse&apos;</span>, mouse);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;cat&apos;</span>, cat);
+<span class="hljs-built_in">console</span>.log(mouse.info); <span class="hljs-comment">// -&gt; { name: &apos;micky&apos;, surname: &apos;mouse&apos;}</span>
+<span class="hljs-built_in">console</span>.log(cat.info); <span class="hljs-comment">// -&gt; {name: &quot;perseas&quot;, surname: &quot;nasikas&quot;}</span>
+<span class="hljs-built_in">console</span>.log(mouse.hello()); <span class="hljs-comment">// -&gt; Hello, my name is micky</span>
+<span class="hljs-built_in">console</span>.log(cat.hello()) <span class="hljs-comment">// -&gt; Hello, my name is perseas</span>
+</code></pre>
+<h4 id="now-we-will-mutate-the-object-state-info-in-an-instance-to-see-if-this-change-will-affect-the-other-instance">Now we will mutate the object state (info) in an instance to see if this change will affect the other instance.</h4>
+<pre><code class="lang-js">mouse.info.name = <span class="hljs-string">&apos;mutated&apos;</span>;
+<span class="hljs-built_in">console</span>.log(mouse.info); <span class="hljs-comment">// -&gt; {name: &quot;mutated&quot;, surname: &quot;mouse&quot;}</span>
+<span class="hljs-built_in">console</span>.log(cat.info); <span class="hljs-comment">// -&gt; {name: &quot;perseas&quot;, surname: &quot;nasikas&quot;}</span>
+</code></pre>
+<h4 id="lets-check-if-we-can-access-the-private-data">Lets check if we can access the private data.</h4>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log(mouse.privateData); <span class="hljs-comment">// -&gt; undefined</span>
+<span class="hljs-built_in">console</span>.log(mouse.secret); <span class="hljs-comment">// -&gt; undefined</span>
+<span class="hljs-built_in">console</span>.log(mouse.getPrivateData()); <span class="hljs-comment">// -&gt; disney</span>
+mouse.secret = <span class="hljs-string">&apos;mutated&apos;</span>
+<span class="hljs-built_in">console</span>.log(mouse.getPrivateData()); <span class="hljs-comment">// -&gt; disney</span>
+</code></pre>
+<h3 id="conclusions">Conclusions:</h3>
+<ol>
+<li><p>Mutating any member of the object or array does NOT affect the other instances, because we use <strong>Object.assign()</strong> to save states, so it copis all of the enumerable own properties by assignment from the source objects to the destination objects with last in priority and the the <strong>instances do not retain a reference.</strong></p>
+</li>
+<li><p>Using function factory with closure we can encapsulate private data(secret). The produced instance has not any direct access to this private data. It can only <strong>access it using the method getPrivateData()</strong>. Also, it is <strong>not possible to change the private data directly</strong> (for example using: mouse.secret=...). In order to be able to change the private data, we have to define a new method for example: <code>setPrivateData(newSecret) { privateData = newSecret; return this; }</code> and the call <code>mouse.settPrivateData(&apos;changed&apos;)</code>.</p>
+</li>
+<li><p>We use a prototype object only for <strong>shaving public/shared methods</strong>.</p>
+</li>
+</ol>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="chapter1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Chapter 1">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Chapter 2","level":"1.3.2","depth":2,"previous":{"title":"Chapter 1","level":"1.3.1","depth":2,"path":"inheritance/chapter1.md","ref":"inheritance/chapter1.md","articles":[]},"dir":"ltr"},"config":{"plugins":["livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Dimosthenis Botsaris, Alexandros Koufatzis","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"JS Notes","language":"en","gitbook":"*","description":"Chapter series to learn JS"},"file":{"path":"inheritance/chapter2.md","mtime":"2018-10-08T16:46:50.927Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-10-08T16:48:54.301Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,457 @@
+
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Chapter 1 · JS Notes</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Dimosthenis Botsaris, Alexandros Koufatzis">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="chapter2.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Async Functions
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.1" data-path="chapter1.html">
+            
+                <a href="chapter1.html">
+            
+                    
+                    Chapter 1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="chapter2.html">
+            
+                <a href="chapter2.html">
+            
+                    
+                    Chapter 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../inheritance/">
+            
+                <a href="../inheritance/">
+            
+                    
+                    Inheritance
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../inheritance/chapter1.html">
+            
+                <a href="../inheritance/chapter1.html">
+            
+                    
+                    Chapter 1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../inheritance/chapter2.html">
+            
+                <a href="../inheritance/chapter2.html">
+            
+                    
+                    Chapter 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Chapter 1</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="introduction">Introduction</h1>
+<h2 id="async-function-always-return-promises">Async function always return Promises</h2>
+<p>Async functions allow you to write promise-based code as if it were synchronous, but without blocking the main thread.  So they are simply syntactic sugar for creating functions that return and wait for Promises. Async functions work like this:</p>
+<p>A) Fulfilling the Promise of an async function:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asyncFunc</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;result&apos;</span>;
+}
+</code></pre>
+<p>which is equivalent to:</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asyncFunc</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve(<span class="hljs-string">&apos;result&apos;</span>);
+}
+</code></pre>
+<p>or</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asyncFunc</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>((resolve, reject) =&gt; {
+        <span class="hljs-keyword">return</span> resolve(<span class="hljs-string">&apos;result&apos;</span>);
+    });
+}
+</code></pre>
+<p>B) Rejecting the Promise of an async function:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asyncFunc</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&apos;We have error!&apos;</span>);
+}
+</code></pre>
+<p>which is equivalent to:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asyncFunc</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&apos;We have error!&apos;</span>));
+}
+</code></pre>
+<p>which is equivalent to:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asyncFunc</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>((resolve, reject) =&gt; {
+        <span class="hljs-keyword">return</span> reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&apos;We have error!&apos;</span>));
+    });
+}
+</code></pre>
+<h2 id="await-operator">await operator</h2>
+<p>The await keyword is used to handle Promises inside the async function. So, handling <strong>results and errors</strong> of asynchronous computations takes place via <code>await</code>. The operator await (which is only allowed inside async functions) waits for its operand, a Promise, to be settled: It &#x2018;pauses&#x2019; the function until fetchUsers is done, and returns the result. The operator await (which is only allowed inside async functions) waits for its operand, a Promise, to be settled (&#x2018;pauses&#x2019; the function until asyncFunc is fulfilled/rejected, and returns the result/error):</p>
+<ul>
+<li><p>If the Promise is fulfilled, the result of await is the fulfillment value.</p>
+</li>
+<li><p>If the Promise is rejected, await throws the rejection value.</p>
+</li>
+</ul>
+<p><strong>Promise is fulfilled:</strong></p>
+<pre><code class="lang-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asyncFunc</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> otherAsyncFunc();
+    <span class="hljs-built_in">console</span>.log(result);
+}
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-comment">// Equivalent to:</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asyncFunc</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> otherAsyncFunc()
+    .then(result =&gt; {
+        <span class="hljs-built_in">console</span>.log(result);
+    });
+}
+</code></pre>
+<p><strong>Promise is rejected:</strong></p>
+<pre><code class="lang-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asyncFunc</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">await</span> otherAsyncFunc();
+    } <span class="hljs-keyword">catch</span> (err) {
+        <span class="hljs-built_in">console</span>.error(err);
+    }
+}
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-comment">// Equivalent to:</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asyncFunc</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> otherAsyncFunc()
+        .catch(err =&gt; {
+            <span class="hljs-built_in">console</span>.error(err);
+        });
+}
+</code></pre>
+<h2 id="error-handling">Error Handling</h2>
+<p>With promises, an async function have two possible return values: resolved value, and rejected value. And we can use .then() for normal case and .catch() for exceptional case. Let&apos;s see how we handle errors in async functions:</p>
+<h4 id="a-trycatch-statement">A) try&#x2026;catch statement</h4>
+<p>The most standard way is to use <code>try...catch</code> statement. When await a call, any rejected value will be thrown as an exception. Here is an example:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asyncFunc</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">await</span> otherAsyncFunc();
+    } <span class="hljs-keyword">catch</span> (err) {
+        <span class="hljs-built_in">console</span>.error(err);
+    }
+}
+</code></pre>
+<p>The catched error is exactly the rejected value. After we caught the exception, we have <strong>several ways to deal</strong> in catch(err) {..} block with it:</p>
+<ul>
+<li><p>Handle the exception, and return a normal value. (Not using any return statement in the catch block is equivalent to using return undefined; and is a normal value as well.) <code>catch(err) { return &apos;fail&apos; }</code></p>
+</li>
+<li><p>Throw it (err), if you want the caller to handle it. <code>catch (err) { throw err }</code></p>
+</li>
+<li><p>Reject it, like return Promise.reject(error). This is equivalent to throw error. <code>catch (err) { return Promise.reject(err) }</code></p>
+</li>
+</ul>
+<h4 id="b-using-catch">B) Using .catch</h4>
+<p>As we declare before the functionality of await is to wait for a promise to be fulfilled or rejected. That&apos;s why we can handle the <code>await otherAsyncFunc</code> as a Promise using <code>then</code> or <code>catch</code> method (as an async function <strong>always returns a Promise</strong>). So we can write error handling like this:</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asyncFunc</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> otherAsyncFunc()
+        .catch((error) =&gt; { <span class="hljs-built_in">console</span>.log(error); });
+}
+</code></pre>
+<p>Of course after we caught the exception in <code>.catch</code> method we can use the above way to deal it.</p>
+<h2 id="how-it-works">How it works</h2>
+<ul>
+<li><p>There are Async Functions. These are declared by prepending the word async in their declaration: <code>async function asyncFunc() {....}</code></p>
+</li>
+<li><p>An Async function always returns Promises.</p>
+</li>
+<li><p>Your code can be &quot;paused&quot; waiting for an Async Function with await</p>
+</li>
+<li><p>await returns whatever the async function returns when it is done. It will return result if Promise is fulfilled or will throw an error if Promise is rejected.</p>
+</li>
+<li><p>await can only be used <em>inside</em> an async function. If you try to use await operator outside of an async function you will get Error.</p>
+</li>
+<li><p>If an Async Function throws an exception, the exception will bubble up to the parent functions just like in normal
+Javascript, and can be caught with try/catch or we can add .catch() method directly in <code>await asyncFunc.catch(error =&gt; { })</code> just like in Promises.</p>
+</li>
+</ul>
+<h2 id="conclusions">Conclusions:</h2>
+<ul>
+<li><p><strong>An Async function always returns Promises</strong>, whether you use await or not. They are simply syntactic sugar for creating functions that return and wait for Promises. The async keyword just declares that the asyncFunc() function returns value which is guaranteed <strong>to be a promise</strong>, so that callers can call asyncFunc().then(...) or await asyncFunc() safely. So when we use <code>async</code> keyword we create an <strong>asynchronous functions that always return a Promise</strong>.</p>
+</li>
+<li><p>We can handle an Async function when we call it, exactly like Promise.</p>
+</li>
+<li><p><code>await</code> operator &quot;pauses&quot; an Async Function.</p>
+</li>
+<li><p><code>await</code> returns whatever the async function returns when it is done. It will return result if Promise is fulfilled or will throw an error if Promise is rejected</p>
+</li>
+<li><p>Best approach to handle errors of Async function is using <code>try...catch</code> statement, but of course we can use <code>.catch()</code> method directly in async func when we call it.</p>
+</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Async Functions">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="chapter2.html" class="navigation navigation-next " aria-label="Next page: Chapter 2">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Chapter 1","level":"1.2.1","depth":2,"next":{"title":"Chapter 2","level":"1.2.2","depth":2,"path":"async-functions/chapter2.md","ref":"async-functions/chapter2.md","articles":[]},"previous":{"title":"Async Functions","level":"1.2","depth":1,"path":"async-functions/index.md","ref":"async-functions/index.md","articles":[{"title":"Chapter 1","level":"1.2.1","depth":2,"path":"async-functions/chapter1.md","ref":"async-functions/chapter1.md","articles":[]},{"title":"Chapter 2","level":"1.2.2","depth":2,"path":"async-functions/chapter2.md","ref":"async-functions/chapter2.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Dimosthenis Botsaris, Alexandros Koufatzis","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"JS Notes","language":"en","gitbook":"*","description":"Chapter series to learn JS"},"file":{"path":"async-functions/chapter1.md","mtime":"2018-10-08T16:46:32.333Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-10-08T16:48:54.301Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

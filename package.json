@@ -1,0 +1,25 @@
+{
+  "name": "js-notes",
+  "version": "0.0.1",
+  "description": "Chapter series to learn JS",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gitbook-cli": "^2.3.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "gitbook serve",
+    "build": "gitbook build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eldimious/js-notes.git"
+  },
+  "author": "Dimosthenis Botsaris Alexandros Koufatzis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eldimious/js-notes/issues"
+  },
+  "homepage": "https://github.com/eldimious/js-notes#readme"
+}

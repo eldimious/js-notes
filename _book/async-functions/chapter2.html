@@ -1,0 +1,415 @@
+
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Chapter 2 · JS Notes</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Dimosthenis Botsaris, Alexandros Koufatzis">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../inheritance/" />
+    
+    
+    <link rel="prev" href="chapter1.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Async Functions
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="chapter1.html">
+            
+                <a href="chapter1.html">
+            
+                    
+                    Chapter 1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.2" data-path="chapter2.html">
+            
+                <a href="chapter2.html">
+            
+                    
+                    Chapter 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../inheritance/">
+            
+                <a href="../inheritance/">
+            
+                    
+                    Inheritance
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../inheritance/chapter1.html">
+            
+                <a href="../inheritance/chapter1.html">
+            
+                    
+                    Chapter 1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../inheritance/chapter2.html">
+            
+                <a href="../inheritance/chapter2.html">
+            
+                    
+                    Chapter 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Chapter 2</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="loops">Loops</h1>
+<p>The following code make two asynchronous function calls, asyncFunc1() and asyncFunc2().</p>
+<pre><code class="lang-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> result1 = <span class="hljs-keyword">await</span> asyncFunc1();
+    <span class="hljs-keyword">const</span> result2 = <span class="hljs-keyword">await</span> asyncFunc2();
+}
+</code></pre>
+<p>This code will:</p>
+<ul>
+<li><p><code>await asyncFunc1()</code> will wait until asyncFunc1() returns.</p>
+</li>
+<li><p>Then <code>await asyncFunc2()</code> will be called.</p>
+</li>
+</ul>
+<p>Notice that asyncFunc2() does not depend on the result of asyncFunc1() and in fact they can be called in parallel!  However by using await here these two calls become <strong>sequential</strong> and the total execution time will be much longer than the parallel version.</p>
+<h2 id="parallel-operation">Parallel operation:</h2>
+<h4 id="a-iterate-over-array-of-promises">A) Iterate over array of promises:</h4>
+<p>We can use Promise.all() to do it. Instead of awaiting two Promises, we are now awaiting a Promise for an Array with two elements.</p>
+<pre><code class="lang-js">
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> [result1, result2] = <span class="hljs-keyword">await</span> <span class="hljs-built_in">Promise</span>.all([
+    asyncFunc1(),
+    asyncFunc2(),
+  ]);
+}
+</code></pre>
+<h4 id="b-iterate-over-array">B) Iterate over array:</h4>
+<p>Let&apos;s say that we have an array of items and we want for each element run a promise function:</p>
+<ul>
+<li><em>Solution 1 (Native):</em></li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asyncFunc</span>(<span class="hljs-params">item</span>) </span>{
+  <span class="hljs-keyword">return</span> item;
+}
+
+(<span class="hljs-keyword">async</span>() =&gt; {
+  <span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> <span class="hljs-built_in">Promise</span>.all(arr.map(<span class="hljs-keyword">async</span> (item) =&gt; {
+    <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> asyncFunc(item);
+    <span class="hljs-keyword">return</span> res;
+  }));
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;results&apos;</span>, results); <span class="hljs-comment">// Output: [1, 2, 3, 4, 5]</span>
+})();
+</code></pre>
+<ul>
+<li><em>Solution 2 (Bluebird):</em></li>
+</ul>
+<p>There is another solution for it if you are not using native Promises but <code>Bluebird</code>. You could also try using <code>Promise.map()</code>, which is mixing the array.map and Promise.all</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> <span class="hljs-built_in">Promise</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;Bluebird&apos;</span>)
+<span class="hljs-keyword">const</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asyncFunc</span>(<span class="hljs-params">item</span>) </span>{
+  <span class="hljs-keyword">return</span> item;
+}
+
+(<span class="hljs-keyword">async</span>() =&gt; {
+  <span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> <span class="hljs-built_in">Promise</span>.map(<span class="hljs-keyword">async</span> (item) =&gt; {
+    <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> asyncFunc(item);
+    <span class="hljs-keyword">return</span> res;
+  });
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;results&apos;</span>, results); <span class="hljs-comment">// Output: [1, 2, 3, 4, 5]</span>
+})();
+</code></pre>
+<h2 id="sequential-operation">Sequential operation:</h2>
+<h4 id="a-call-different-functions">A) Call different functions:</h4>
+<pre><code class="lang-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> result1 = <span class="hljs-keyword">await</span> asyncFunc1();
+  <span class="hljs-keyword">const</span> result2 = <span class="hljs-keyword">await</span> asyncFunc2();
+}
+</code></pre>
+<h4 id="a-iterate-over-array">A) Iterate over array:</h4>
+<ul>
+<li><em>Solution 1 (Native):</em></li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asyncFunc</span>(<span class="hljs-params">item</span>) </span>{
+  <span class="hljs-keyword">return</span> item;
+}
+(<span class="hljs-keyword">async</span>() =&gt; {
+  <span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> arr.reduce(<span class="hljs-keyword">async</span> (promise, item) =&gt; {
+    <span class="hljs-comment">// This line will wait for the last async function to finish.</span>
+    <span class="hljs-comment">// The first iteration uses an already resolved Promise</span>
+    <span class="hljs-comment">// so, it will immediately continue.</span>
+    <span class="hljs-keyword">const</span> accumulator = <span class="hljs-keyword">await</span> promise;
+    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> asyncFunc(item)
+    <span class="hljs-keyword">return</span> [...accumulator, result]
+  }, <span class="hljs-built_in">Promise</span>.resolve([]));    
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;results&apos;</span>, results); <span class="hljs-comment">// Output: [1, 2, 3, 4, 5]</span>
+})();
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="chapter1.html" class="navigation navigation-prev " aria-label="Previous page: Chapter 1">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../inheritance/" class="navigation navigation-next " aria-label="Next page: Inheritance">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Chapter 2","level":"1.2.2","depth":2,"next":{"title":"Inheritance","level":"1.3","depth":1,"path":"inheritance/index.md","ref":"inheritance/index.md","articles":[{"title":"Chapter 1","level":"1.3.1","depth":2,"path":"inheritance/chapter1.md","ref":"inheritance/chapter1.md","articles":[]},{"title":"Chapter 2","level":"1.3.2","depth":2,"path":"inheritance/chapter2.md","ref":"inheritance/chapter2.md","articles":[]}]},"previous":{"title":"Chapter 1","level":"1.2.1","depth":2,"path":"async-functions/chapter1.md","ref":"async-functions/chapter1.md","articles":[]},"dir":"ltr"},"config":{"plugins":["livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Dimosthenis Botsaris, Alexandros Koufatzis","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"JS Notes","language":"en","gitbook":"*","description":"Chapter series to learn JS"},"file":{"path":"async-functions/chapter2.md","mtime":"2018-10-08T16:46:38.604Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-10-08T16:48:54.301Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
