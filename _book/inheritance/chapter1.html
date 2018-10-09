@@ -1,0 +1,546 @@
+
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Chapter 1 · JS Notes</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Dimosthenis Botsaris, Alexandros Koufatzis">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="chapter2.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../async-functions/">
+            
+                <a href="../async-functions/">
+            
+                    
+                    Async Functions
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../async-functions/chapter1.html">
+            
+                <a href="../async-functions/chapter1.html">
+            
+                    
+                    Chapter 1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../async-functions/chapter2.html">
+            
+                <a href="../async-functions/chapter2.html">
+            
+                    
+                    Chapter 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Inheritance
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1" data-path="chapter1.html">
+            
+                <a href="chapter1.html">
+            
+                    
+                    Chapter 1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="chapter2.html">
+            
+                <a href="chapter2.html">
+            
+                    
+                    Chapter 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Chapter 1</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="introduction">Introduction</h1>
+<p>One of JavaScript best features is the ability to create and inherit from objects <strong>without classes and class inheritance</strong>. Its a <strong>combination</strong> of <strong>delegate prototypes, runtime object extension, and closures</strong> which allows you to express three distinct kinds of prototypes in JavaScript, which provide significant advantages over classical inheritance. In this chapter we will discover the <em>ways we can use to implement inheritance in JS</em>.</p>
+<h1 id="a-prototype-delegation">A) Prototype Delegation</h1>
+<p>A prototype is a <strong>working object instance</strong>. Objects inherit directly from other objects. So in prototypal inheritance, instances inherit from other instances. Using delegate prototypes we are setting the prototype of one instance to refer to an examplar object.<br>
+In JavaScript, an object may have a <strong>link to a prototype for delegation</strong>. If a property is <strong>not found on</strong> the object, the lookup is delegated to the delegate prototype, which may have a link to its own delegate prototype, and so on up the chain until you arrive at <code>Object.prototype</code>, which is the root delegate. So using, delegate prototypes (setting the prototype of one instance to refer to an examplar object), it&#x2019;s literally <strong>Objects Linking to Other Objects</strong>, or OLOO, as Kyle Simpson calls it.<br>
+We can achieve a prototype delegation using: <br></p>
+<ol>
+<li><p>ES5 constructor function.</p>
+</li>
+<li><p>ES6 class(sugar style of constructor function).</p>
+</li>
+<li><p>Function factory using Object.create().</p>
+</li>
+</ol>
+<p><strong>Pos of using Prototype Delegation</strong></p>
+<ol>
+<li><p>Micro-optimization performance benefit. Method delegation can  <strong>preserve memory resources</strong> because you only need one copy of each method to be shared by all instances.</p>
+</li>
+<li><p>Really good to <strong>store public/shared methods</strong> on a shared prototype. Thats way, you have just one copy shared among all instances. If you add a method in prototype, it will affect all the instances.</p>
+</li>
+</ol>
+<p><strong>Cos of using Prototype Delegation</strong></p>
+<ol>
+<li>One major drawback to delegation is that it&#x2019;s <strong>NOT</strong> very good for <strong>storing states</strong>(properties). If you try to store state as <em>objects or arrays</em>, mutating any member of the object or array will <em>mutate the member for every instance that shares the prototype</em>. In order to preserve instance safety, you need to make a copy of the state for each object. In order to preserve instance safety, you need to make a copy of the state for each object. <br>
+So, a good approach is to <strong>store in prototype only shared methods among instances</strong> and use the Concatenative inheritance(mixins), using for example Object.assign, to store states for each instance.<br></li>
+</ol>
+<pre><code class="lang-js"><span class="hljs-built_in">Object</span>.assign(<span class="hljs-built_in">Object</span>.create(protoObj),
+  <span class="hljs-comment">// here we can store states with safety as the instances and the &quot;source&quot; </span>
+  <span class="hljs-comment">// object and the instances among them do not retain a reference.</span>
+  <span class="hljs-comment">// So, changing user.surname will affect only the current instance, and </span>
+  <span class="hljs-comment">// not the other ones.</span>
+  {
+    user: {
+      surname: surname,
+    }
+  }
+);
+</code></pre>
+<h3 id="es5-constructor-function-versionfunction-constructor">ES5 constructor function version(Function Constructor):</h3>
+<p><strong>Pos of using Function Constructor &amp; Class</strong></p>
+<ol>
+<li><p><em>this</em> refers to the new object.</p>
+</li>
+<li><p>Micro-optimization performance benefit</p>
+</li>
+</ol>
+<p><strong>Cos of using Function Constructor &amp; Class</strong></p>
+<ol>
+<li><p>Required <code>new</code>. Constructors that aren&#x2019;t running in strict mode can be  dangerous. If a caller forgets <code>new</code> and you&#x2019;re not using strict mode or ES6 classes, anything you assign to <code>this</code> will pollute the global namespace.</p>
+</li>
+<li><p><em>Constructors violate the open/closed principle</em> because they couple all callers to the details of how your object gets instantiated.</p>
+</li>
+<li><p><em>Constructors break the Open / Closed Principle</em>. API should be open for extension, but closed for modification.</p>
+</li>
+<li><p>Using Constructors Enables the Deceptive <code>instanceof</code>.  instanceof does an identity check comparing the object&#x2019;s <code>[[Prototype]]</code> object to the <code>Constructor.prototype</code> property.</p>
+</li>
+</ol>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Animal</span> (<span class="hljs-params">name</span>) </span>{
+  <span class="hljs-keyword">this</span>.name = name;
+}
+
+Animal.prototype.hello = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hello</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;Hello, my name is &apos;</span> + <span class="hljs-keyword">this</span>.name;
+}
+
+<span class="hljs-keyword">const</span> mouse = <span class="hljs-keyword">new</span> Animal(<span class="hljs-string">&apos;mouse&apos;</span>);
+
+<span class="hljs-built_in">console</span>.log(mouse.hello()); <span class="hljs-comment">// Hello, my name is mouse</span>
+</code></pre>
+<h3 id="es6-constructor-function-versionclass---sugar-style-of-function-constructor">ES6 constructor function version(&apos;Class&apos; -&gt; sugar style of Function Constructor):</h3>
+<p><strong>Cos of using Class</strong></p>
+<ol>
+<li><p>Temptation for users to create problematic class hierarchies using the extends keyword. Drive to the fragile base class problem, the gorilla banana problem, the duplication by necessity problem. &quot;You wanted a banana but what you got was a gorilla holding the banana and the entire jungle.&#x201D; ~ Joe Armstrong</p>
+</li>
+<li><p>The Tight Coupling Problem: The coupling between a child class and its parent is the tightest form of coupling in OO design. That&#x2019;s the opposite of reusable, modular code.</p>
+</li>
+</ol>
+<pre><code class="lang-javascript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Animal</span> </span>{
+  <span class="hljs-keyword">constructor</span> (name) {
+    <span class="hljs-keyword">this</span>.name = name;
+  }
+  hello () {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello, my name is <span class="hljs-subst">${ this.name }</span>`</span>;
+  }
+}
+
+<span class="hljs-keyword">const</span> mouse = <span class="hljs-keyword">new</span> Animal(<span class="hljs-string">&apos;mouse&apos;</span>);
+
+<span class="hljs-built_in">console</span>.log(mouse.hello()); <span class="hljs-comment">// Hello, my name is mouse</span>
+</code></pre>
+<h3 id="factory-function-and-objectcreate">Factory function and Object.create()</h3>
+<p><code>Object.create()</code> is an ES5 feature that was championed by Douglas Crockford so that we could attach delegate prototypes without using constructors and the <code>new</code> keyword.</p>
+<p><strong>Pos of Using Factories</strong></p>
+<ol>
+<li><p>There is not any need of <code>new</code> constructor. No new neeeded. There&#x2019;s no risk of using it in the &#x201C;wrong&#x201D; way as it does not require <code>new</code>, so there is not any risk of pollute the global namespace.</p>
+</li>
+<li><p><code>this</code> behaves as it normally would, so you can use it to access the parent object. </p>
+</li>
+<li><p>Can create a closure inside function factory for data privacy. Closures are a common pattern in JavaScript, and they&#x2019;re commonly used for data privacy.</p>
+</li>
+<li><p>The prototype property isn&#x2019;t used(for example mouse.prototype = Animal;), so there will be no instanceof link between the function and the objects it creates. It is simply a function that happens to create objects.</p>
+</li>
+</ol>
+<p><strong>Cos of Using Factories</strong></p>
+<ol>
+<li><p><code>this</code> doesn&#x2019;t refer to the new object inside the factory.</p>
+</li>
+<li><p>It may perform slower than a constructor function in micro-optimization benchmarks.</p>
+</li>
+</ol>
+<pre><code class="lang-javascript">
+<span class="hljs-keyword">const</span> animal = {
+  hello () {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello, my name is <span class="hljs-subst">${ this.name }</span>`</span>;
+  }
+};
+
+<span class="hljs-keyword">const</span> mouseFactory = (name) =&gt; <span class="hljs-built_in">Object</span>.assign(<span class="hljs-built_in">Object</span>.create(animal), {
+  name
+});
+
+<span class="hljs-keyword">const</span> mouse = mouseFactory(<span class="hljs-string">&apos;mouse&apos;</span>);
+
+<span class="hljs-built_in">console</span>.log(mouse.hello()); <span class="hljs-comment">// Hello, my name is mouse</span>
+</code></pre>
+<p><strong>OR example with private data:</strong></p>
+<p>This way, we use a closure inside factory function to add a &quot;private variable&quot;, in order the produced instance not to be able to have access or change to this private variable. The instance can only get the private variable via a method getPrivateData(), The produced instance will not have a property called secret or privateData, but will have a method getPrivateData().</p>
+<pre><code class="lang-javascript">
+<span class="hljs-keyword">const</span> animal = {
+  hello () {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello, my name is <span class="hljs-subst">${ this.name }</span>`</span>;
+  }
+};
+
+<span class="hljs-keyword">const</span> mouseFactory = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mouseFactory</span>(<span class="hljs-params">name, secret</span>) </span>{
+    <span class="hljs-keyword">const</span> privateData = secret;
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign(<span class="hljs-built_in">Object</span>.create(animal), {
+        name,
+        getPrivateData() {
+            <span class="hljs-keyword">return</span> privateData;
+        }
+    })
+};
+
+<span class="hljs-keyword">const</span> mouse = mouseFactory(<span class="hljs-string">&apos;mouse&apos;</span>, <span class="hljs-string">&apos;secret&apos;</span>);
+
+<span class="hljs-built_in">console</span>.log(mouse.hello()); <span class="hljs-comment">// Hello, my name is mouse</span>
+<span class="hljs-built_in">console</span>.log(mouse.getPrivateData()); <span class="hljs-comment">// secret</span>
+</code></pre>
+<h1 id="b-concatenative-inheritancemixins">B) Concatenative inheritance(mixins):</h1>
+<p>Concatenative inheritance is the process of <strong>copying the properties</strong> from one object to another, <strong>without retaining a reference</strong> between the two objects. <br> 
+This process is commonly achieved using <code>Object.assign()</code>.It will copy all of the enumerable own properties by assignment from the source objects to the destination objects with last in priority.  <br> 
+Concatenative inheritance is possible because of a feature in JavaScript known as dynamic object extension: the ability to add to an object after it has been instantiated.
+So, using concatenative inheritance, you just copy properties from an exemplar object to a new instance, without retaining a reference among them.</p>
+<p><strong>Pos of using Concatenative inheritance</strong></p>
+<ol>
+<li>Is really good to save states as the instances and the &quot;source&quot; object and the instances among them do not retain a reference. So for example if the state is an object/array and we mutate an object value <strong>will NOT affect  the other instances</strong>. </li>
+</ol>
+<p><strong>Cos of using Concatenative inheritance</strong></p>
+<ol>
+<li>Perhaps more slow from Prototype Delegation, as you need to copy each method property for each instance.</li>
+</ol>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> animal = {
+  hello() {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello, my name is <span class="hljs-subst">${ this.name }</span>`</span>;
+  }
+};
+
+<span class="hljs-keyword">const</span> mouse = <span class="hljs-built_in">Object</span>.assign({}, 
+  animal,
+  {
+    name: <span class="hljs-string">&apos;mouse&apos;</span>,
+  }
+);
+
+<span class="hljs-built_in">console</span>.log(mouse.hello()); <span class="hljs-comment">// Hello, my name is mouse</span>
+</code></pre>
+<h1 id="c-functional-inheritance">C) Functional Inheritance</h1>
+<p>Coined by Douglas Crockford in &#x201C;JavaScript: The Good Parts&#x201D;. In JavaScript, any function can create an object. When that function is not a constructor (or <code>class</code>), it&#x2019;s called a factory function. <br> 
+Functional inheritance makes use of a <strong>factory function</strong>, and then tacks on new properties <strong>using concatenative inheritance</strong>. So it works by <strong>producing an object from a factory</strong>, and <strong>extending the produced object by assigning properties to it directly (using concatenative inheritance-&gt; Object.assign)</strong>.Functions created for the purpose of extending existing objects are commonly referred to as functional mixins</p>
+<p><strong>Pos of using Concatenative inheritance</strong></p>
+<ol>
+<li><p>Allows you to use the function <strong>closure</strong> to encapsulate <strong>private data</strong>. In other words, you can enforce private state.</p>
+</li>
+<li><p>Compibing it with concatenative inheritance(Object.assign), we can <strong>store states</strong> as we copy properties from an exemplar object to a new instance, without retaining a reference among them.</p>
+</li>
+</ol>
+<p><strong>Cos of using Concatenative inheritance</strong></p>
+<ol>
+<li>Perhaps more slow from Prototype Delegation, as you need to copy each method property for each instance. If you&#x2019;re creating a hundreds of thousands of objects and you need your app to perform smoothly at or near realtime (think game engines, realtime signal processors etc), delegating calls to methods(adding shared methods in a prototype obj) can save you from a lot of manual memory management.</li>
+</ol>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> animal = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">secret</span>) </span>{
+  <span class="hljs-keyword">const</span> privateData = secret;
+  <span class="hljs-keyword">const</span> attrs = {};
+
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign(<span class="hljs-keyword">this</span>, {
+    hello(name) {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello, my name is <span class="hljs-subst">${ this.name }</span>`</span>;;
+    },
+    set(name, value) {
+      attrs[name] = value;
+    },
+    get (name) {
+      <span class="hljs-keyword">return</span> attrs[name];
+    }
+    getPrivateData() {
+      <span class="hljs-keyword">return</span> privateData;
+    }
+  });
+};
+
+<span class="hljs-keyword">const</span> mouse = animal(<span class="hljs-string">&apos;secret&apos;</span>);
+<span class="hljs-built_in">console</span>.log(mouse.hello(<span class="hljs-string">&apos;mouse&apos;</span>)); <span class="hljs-comment">// Hello, my name is mouse</span>
+</code></pre>
+<p>Conclusions:</p>
+<ol>
+<li><p>No need of using classes in JavaScript.</p>
+</li>
+<li><p>Avoid <code>new</code> constructor. We can use Object.create() to inherit from prototype.</p>
+</li>
+<li><p>With dynamic object extension(<code>Object.assign</code> for states), object literals and <code>Object.create()</code>(for shared methods), we have everything we need. And <code>this</code> behaves just like it does in any other function.</p>
+</li>
+</ol>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Inheritance">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="chapter2.html" class="navigation navigation-next " aria-label="Next page: Chapter 2">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Chapter 1","level":"1.3.1","depth":2,"next":{"title":"Chapter 2","level":"1.3.2","depth":2,"path":"inheritance/chapter2.md","ref":"inheritance/chapter2.md","articles":[]},"previous":{"title":"Inheritance","level":"1.3","depth":1,"path":"inheritance/index.md","ref":"inheritance/index.md","articles":[{"title":"Chapter 1","level":"1.3.1","depth":2,"path":"inheritance/chapter1.md","ref":"inheritance/chapter1.md","articles":[]},{"title":"Chapter 2","level":"1.3.2","depth":2,"path":"inheritance/chapter2.md","ref":"inheritance/chapter2.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Dimosthenis Botsaris, Alexandros Koufatzis","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"JS Notes","language":"en","gitbook":"*","description":"Chapter series to learn JS"},"file":{"path":"inheritance/chapter1.md","mtime":"2018-10-08T16:46:43.659Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-10-08T16:48:54.301Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
