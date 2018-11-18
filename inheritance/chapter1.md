@@ -10,9 +10,10 @@ We can achieve a prototype delegation using: <br />
 
 1. ES5 constructor function.
 
-2. ES6 class(sugar style of constructor function).
+2. ES6 class (sugar style of constructor function).
 
 3. Function factory using Object.create().
+
 
 **Pos of using Prototype Delegation**
 
@@ -71,7 +72,16 @@ Animal.prototype.hello = function hello () {
 
 const mouse = new Animal('mouse');
 
+console.log(mouse); // Has as it's own property the name and as prototype method the hello()
+  // {
+  //  name: "mouse"
+  //  __proto__:
+  //  hello: ƒ hello()
+  //  constructor: ƒ Animal(name)
+  //  }
 console.log(mouse.hello()); // Hello, my name is mouse
+delete mouse.name;
+console.log(mouse.hello()); // Hello, my name is undefined
 ```
 
 
