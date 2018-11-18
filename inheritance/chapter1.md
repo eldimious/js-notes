@@ -186,18 +186,66 @@ const animal = {
   }
 };
 
-const mouseFactory = (name) => Object.assign(Object.create(animal), {
+const animalFactory = (name) => Object.assign(Object.create(animal), {
   name
 });
 
-const mouse = mouseFactory('mouse');
+const mouse = animalFactory('mouse');
 
+console.log(mouse); // Has as it's own property the name and as prototype method the hello() (missing constructor in __proto__)
+  // {
+  //   name:"mouse"
+  //   __proto__:
+  //   hello: ƒ hello()
+  // }
 console.log(mouse.hello()); // Hello, my name is mouse
 ```
 
-**OR example with private data:**
+1. **Let's change name property in instances:**
 
-This way, we use a closure inside factory function to add a "private variable", in order the produced instance not to be able to have access or change to this private variable. The instance can only get the private variable via a method getPrivateData(), The produced instance will not have a property called secret or privateData, but will have a method getPrivateData().
+```js
+const mouse = animalFactory('mouse');
+const cat = animalFactory('cat');
+delete mouse.name;
+console.log(mouse.hello()); // Hello, my name is undefined
+console.log(cat.hello()); // Hello, my name is cat
+mouse.name = 'new mouse';
+console.log(mouse.hello()); // Hello, my name is new mouse
+console.log(cat.hello()); // Hello, my name is cat
+```
+
+  - **Result**: changes in each instance's property(name), does NOT affect the other instance.
+
+
+2. **Let's change instance's method:**
+
+```js
+const mouse = animalFactory('mouse');
+const cat = animalFactory('cat');
+mouse.hello = () => 'Hello, this is a new method';
+console.log(mouse.hello()); // Hello, this is a new method
+console.log(cat.hello()); // Hello, my name is cat
+```
+
+  - Result: if we change instance's method does NOT affect other instance's method.
+
+
+3. **Let's change prototype's method:**
+
+```js
+const mouse = animalFactory('mouse');
+const cat = animalFactory('cat');
+animal.hello = () => 'Hello, this is new prototype method';
+console.log(mouse.hello()); // Hello, this is new prototype method
+console.log(cat.hello()); // Hello, this is new prototype method
+```
+
+  - **Result**: Even if we initialize first our instances (mouse, cat), although changes in prototype's methods affect all the instances. That's why a prototype is a **working object instance**. Changes in prototype affect all the instances.
+
+
+### Factory function and Object.create() with private data
+
+This way, we use a **closure inside factory function** to add a "private variable", in order the produced instance **not** to be able to have **access or change** to this private variable. The instance can only **get** the private variable via a method **getPrivateData()**, The produced instance will not have a property called secret or privateData, but will have a method getPrivateData().
 
 ```javascript
 
@@ -207,7 +255,7 @@ const animal = {
   }
 };
 
-const mouseFactory = function mouseFactory(name, secret) {
+const animalFactory = function animalFactory(name, secret) {
 	const privateData = secret;
 	return Object.assign(Object.create(animal), {
 		name,
@@ -217,8 +265,9 @@ const mouseFactory = function mouseFactory(name, secret) {
 	})
 };
 
-const mouse = mouseFactory('mouse', 'secret');
+const mouse = animalFactory('mouse', 'secret');
 
+console.log(mouse); // does not include privateData as property
 console.log(mouse.hello()); // Hello, my name is mouse
 console.log(mouse.getPrivateData()); // secret
 ```
