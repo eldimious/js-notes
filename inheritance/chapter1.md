@@ -81,8 +81,51 @@ console.log(mouse); // Has as it's own property the name and as prototype method
   //  }
 console.log(mouse.hello()); // Hello, my name is mouse
 delete mouse.name;
-console.log(mouse.hello()); // Hello, my name is undefined
+console.log(cat.hello()); // Hello, my name is undefined
 ```
+
+1. **Let's change name property in instances:**
+
+```js
+const mouse = new Animal('mouse');
+const cat = new Animal('cat');
+delete mouse.name;
+console.log(mouse.hello()); // Hello, my name is undefined
+console.log(cat.hello()); // Hello, my name is cat
+mouse.name = 'new mouse';
+console.log(mouse.hello()); // Hello, my name is new mouse
+console.log(cat.hello()); // Hello, my name is cat
+```
+
+  - **Result**: changes in each instance's property(name), does NOT affect the other instance.
+
+
+2. **Let's change instance's method:**
+
+```js
+const mouse = new Animal('mouse');
+const cat = new Animal('cat');
+mouse.hello = () => 'Hello, this is a new method';
+console.log(mouse.hello()); // Hello, this is a new method
+console.log(cat.hello()); // Hello, my name is cat
+```
+
+  - Result: if we change instance's method does NOT affect other instance's method.
+
+
+3. **Let's change prototype's method:**
+
+```js
+const mouse = new Animal('mouse');
+const cat = new Animal('cat');
+Animal.prototype.hello = function hello () {
+  return 'Hello, this is new prototype method'
+}
+console.log(mouse.hello()); // Hello, this is new prototype method
+console.log(cat.hello()); // Hello, this is new prototype method
+```
+
+  - **Result**: Even if we initialize first our instances (mouse, cat), although changes in prototype's methods affect all the instances. That's why a prototype is a **working object instance**. Changes in prototype affect all the instances.
 
 
 ### ES6 constructor function version('Class' -> sugar style of Function Constructor): ###
@@ -105,6 +148,13 @@ class Animal {
 
 const mouse = new Animal('mouse');
 
+console.log(mouse); // Has as it's own property the name and as prototype method the hello()
+  // {
+  // name:"mouse"
+  //   __proto__:
+  //   constructor: class Animal
+  //   hello: ƒ hello()
+  // }
 console.log(mouse.hello()); // Hello, my name is mouse
 ```
 
