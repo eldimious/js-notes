@@ -313,7 +313,7 @@ Functional inheritance makes use of a **factory function**, and then tacks on ne
 
 1. Allows you to use the function **closure** to encapsulate **private data**. In other words, you can enforce private state.
 
-2. Compibing it with concatenative inheritance(Object.assign), we can **store states** as we copy properties from an exemplar object to a new instance, without retaining a reference among them.
+2. Without or with concatenative inheritance(Object.assign), we can **store states** as we copy properties from an exemplar object to a new instance, without retaining a reference among them.
 
 **Cos of using Concatenative inheritance**
 
