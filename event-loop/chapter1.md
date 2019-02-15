@@ -132,3 +132,28 @@ Let’s “execute” this code and see what happens:
 
 #### How setTimeout(…) works
 It’s important to note that setTimeout(…) **doesn’t automatically put your callback on the event loop queue**. It sets up a timer. When the timer expires, the environment places your callback into the event loop. That doesn’t mean that `cb1` will be executed in 5,000 ms but rather that, in 5,000 ms, `cb1` *will be added to the queue*. The queue, however, might have other events that have been added earlier — your callback will have to wait or call stack is not empty to push it there.
+
+Take a look at the following code:
+
+```js
+const bar = () => console.log('bar');
+
+const baz = () => console.log('baz');
+
+const foo = () => {
+  console.log('foo');
+  setTimeout(bar, 0);
+  baz();
+};
+
+foo();
+```
+
+This code prints, maybe surprisingly:
+```js
+foo
+baz
+bar
+```
+
+When setTimeout() is called, the Browser(Web) or Node.js start the timer. Once the timer expires, in this case immediately as we put 0 as the timeout, the callback function is put in the Message Queue.
