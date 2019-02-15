@@ -29,3 +29,15 @@ Like any other programming language, JavaScript runtime has one stack and one he
 - **Stack** - This represents the single thread provided for JavaScript code execution. Function calls form a stack of frames. Stack is LIFO (last in, first out) data storage which store current function execution context of a program.
 
 - **Browser or Web APIs** are built into your web browser, and are able to expose data from the browser and surrounding computer environment and do useful complex things with it. They are not part of the JavaScript language itself, rather they are built on top of the core JavaScript language, providing you with extra superpowers to use in your JavaScript code. If you’re a Node.js developer, these are the C++ APIs.
+
+In general, in most browsers there is an event loop for every browser tab, to make every process isolated and avoid a web page with infinite loops or heavy processing to block your entire browser.
+
+The environment manages multiple concurrent event loops, to handle API calls for example. Web Workers run in their own event loop as well.
+
+You mainly need to be concerned that your code will run on a single event loop, and write code with this thing in mind to avoid blocking it.
+
+## The call stack
+
+The call stack is a LIFO queue (Last In, First Out).
+
+The event loop continuously checks the call stack to see if there’s any function that needs to run.
