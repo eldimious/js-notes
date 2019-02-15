@@ -157,3 +157,34 @@ bar
 ```
 
 When setTimeout() is called, the Browser(Web) or Node.js start the timer. Once the timer expires, in this case immediately as we put 0 as the timeout, the callback function is put in the Message Queue.
+
+## ES6 Job queue
+A new concept called the `Job Queue` was introduced in ES6. It’s a layer on top of the Event Loop queue. You are most likely to bump into it when dealing with the asynchronous behavior of Promises (we’ll talk about them too). It’s a way to execute the result of an async function as soon as possible, rather than being put at the end of the call stack. Promises that resolve before the current function ends will be executed right after the current function.
+
+Example:
+
+```js
+const bar = () => console.log('bar');
+
+const baz = () => console.log('baz');
+
+const foo = () => {
+  console.log('foo');
+  setTimeout(bar, 0);
+  new Promise((resolve, reject) =>
+    resolve('should be right after baz, before bar');
+  ).then(resolve => console.log(resolve));
+  baz();
+};
+
+foo();
+```
+
+This prints:
+
+```js
+foo
+baz
+should be right after baz, before bar
+bar
+```
