@@ -46,3 +46,31 @@ The **call stack** is a LIFO queue (Last In, First Out). The **event loop** cont
 Hence, first stack entry is foo(). Since foo function calls bar function, second stack entry is bar(). Since bar function calls baz function, third stack entry is baz(). And finally, baz function calls console.log, fourth stack entry is console.log('Hello from baz'). **Until a function returns something (while function is executing), it won’t be popped out from the stack.** Stack will pop entries one by one as soon as that entry (function) returns some value, and it will continue pending function executions.
 
 ![Stack frames](https://cdn-images-1.medium.com/max/1000/1*rRoLpv-Zrmpa-srNhwlbvA.gif)
+
+Let’s pick another one example:
+
+```js
+const bar = () => console.log('bar')
+
+const baz = () => console.log('baz')
+
+const foo = () => {
+  console.log('foo')
+  bar()
+  baz()
+}
+
+foo()
+```
+
+This code prints:
+
+```js
+foo
+bar
+baz
+```
+
+At this point the call stack looks like this:
+
+![Call stack frames](https://flaviocopes.com/node-event-loop/call-stack-first-example.png)
