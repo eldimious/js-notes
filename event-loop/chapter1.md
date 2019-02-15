@@ -188,3 +188,83 @@ baz
 should be right after baz, before bar
 bar
 ```
+
+Another one example:
+
+```js
+console.log('script start');
+
+setTimeout(function() {
+  console.log('setTimeout');
+}, 0);
+
+Promise.resolve().then(function() {
+  console.log('promise1');
+}).then(function() {
+  console.log('promise2');
+});
+
+console.log('script end');
+```
+
+This prints:
+
+```js
+script start
+script end
+promise1
+promise2
+setTimeout
+```
+
+Another one:
+
+```js
+console.log('script start');
+
+setTimeout(function() {
+  	console.log('setTimeout1');
+}, 0);
+
+const foo = async() => {
+	console.log('foo');
+  	return 'foo';
+}
+const bar = async() => {
+	console.log('bar');
+  	return 'bar';
+}
+
+(async() => {
+	setTimeout(function() {
+  		console.log('setTimeout2');
+	}, 0);
+  	await foo();
+  	await bar();
+})();
+```
+
+This prints:
+
+```js
+script start
+foo
+bar
+setTimeout1
+setTimeout2
+```
+
+#### Bug in nodeJS version 8
+
+```js
+const p = Promise.resolve();
+
+(async () => {
+  await p; console.log('after:await');
+})();
+
+p.then(() => console.log('tick:a'))
+ .then(() => console.log('tick:b'));
+```
+
+![Bug in nodejs 8](https://v8.dev/_img/fast-async/await-bug-node-10.svg)
