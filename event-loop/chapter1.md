@@ -39,6 +39,8 @@ You mainly need to be concerned that your code will run on a single event loop, 
 
 ## Call stack - Event Loop
 
+### Digging in the Call Stack
+
 The **call stack** is a LIFO queue (Last In, First Out). The **event loop** continuously checks the call stack to see if there’s any function that needs to run. To visualize, how JavaScript executes a program, we need to understand JavaScript runtime.
 
 ![Javascript Runtime Enviroment](https://cdn-images-1.medium.com/max/1000/1*ocCc8yEvUEeOtGU2LNQnpA.png)
@@ -74,3 +76,23 @@ baz
 At this point the call stack looks like this:
 
 ![Call stack frames](https://flaviocopes.com/node-event-loop/call-stack-first-example.png)
+
+The event loop on every iteration looks if there’s something in the call stack, and executes it **until the call stack is empty**:
+
+![](https://flaviocopes.com/node-event-loop/execution-order-first-example.png)
+
+### Digging in the Event Loop
+
+*So what is the event loop after all?*
+
+Browser comes with a JavaScript engine which provides JavaScript runtime environment. For example, Google chrome uses V8 JavaScript engine, developed by them. But guess what, browser uses more than just a JavaScript engine. This is what browser under the hood looks like.
+
+![Browser under the hood](https://cdn-images-1.medium.com/max/1000/1*lZ-KXoVNUSOwaq7q8zUBDg.png)
+
+JavaScript runtime actually consist of 2 more components viz. **event loop** and **callback queue**. Callback queue is also called as message queue or task queue.
+
+![Event Loop](https://cdn-images-1.medium.com/max/1000/1*KGBiAxjeD9JT2j6KDo0zUg.png)
+
+The **Event Loop** continuously checks the call stack to see if there’s any function that needs to run. So it has one simple job — *to monitor the Call Stack and the Callback Queue.* If the Call Stack is empty, it will take the first event from the queue and will push it to the Call Stack, which effectively runs it.
+
+Such an iteration is called a tick in the Event Loop.
