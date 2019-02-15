@@ -36,8 +36,13 @@ The environment manages multiple concurrent event loops, to handle API calls for
 
 You mainly need to be concerned that your code will run on a single event loop, and write code with this thing in mind to avoid blocking it.
 
-## The call stack
 
-The call stack is a LIFO queue (Last In, First Out).
+## Call stack - Event Loop
 
-The event loop continuously checks the call stack to see if there’s any function that needs to run.
+The **call stack** is a LIFO queue (Last In, First Out). The **event loop** continuously checks the call stack to see if there’s any function that needs to run. To visualize, how JavaScript executes a program, we need to understand JavaScript runtime.
+
+![Javascript Runtime Enviroment](https://cdn-images-1.medium.com/max/1000/1*ocCc8yEvUEeOtGU2LNQnpA.png)
+
+Hence, first stack entry is foo(). Since foo function calls bar function, second stack entry is bar(). Since bar function calls baz function, third stack entry is baz(). And finally, baz function calls console.log, fourth stack entry is console.log('Hello from baz'). **Until a function returns something (while function is executing), it won’t be popped out from the stack.** Stack will pop entries one by one as soon as that entry (function) returns some value, and it will continue pending function executions.
+
+![Stack frames](https://cdn-images-1.medium.com/max/1000/1*rRoLpv-Zrmpa-srNhwlbvA.gif)
