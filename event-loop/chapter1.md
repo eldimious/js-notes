@@ -97,7 +97,7 @@ JavaScript runtime actually consist of 2 more components viz. **event loop** and
 
 ![Event Loop](https://cdn-images-1.medium.com/max/1000/1*KGBiAxjeD9JT2j6KDo0zUg.png)
 
-The **Event Loop** continuously checks the call stack to see if there’s any function that needs to run. So it has one simple job — *to monitor the Call Stack and the Callback Queue.* If the Call Stack is empty, it will take the first event from the queue and will push it to the Call Stack, which effectively runs it.
+The **Event Loop** *continuously checks the call stack to see if there’s any function that needs to run*. So it has one simple job  —  *to monitor the Call Stack and the Callback Queue.* If the Call Stack is empty, it will take the first event from the queue and will push it to the Call Stack, which effectively runs it.
 Such an iteration is called a tick in the Event Loop.
 
 ### Queuing Function Execution
