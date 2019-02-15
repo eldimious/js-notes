@@ -16,8 +16,10 @@ Any code after above statement won’t be executed as while loop will loop infin
 
 ## Basic Architecture
 
+1. Overview of major components in a browser
 ![Overview of major components in a browser](https://cdn-images-1.medium.com/max/1200/1*7GXoHZiIUhlKuKGT22gHmA.png)
 
+2. Overview of major components in nodeJS
 ![Overview of major components in a nodeJS](https://i.stack.imgur.com/QRePV.jpg)
 
 ![NodeJS architecture](https://dotnettricksweb.blob.core.windows.net/img/nodejs/node.js-architecture.png)
