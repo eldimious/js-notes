@@ -94,5 +94,38 @@ JavaScript runtime actually consist of 2 more components viz. **event loop** and
 ![Event Loop](https://cdn-images-1.medium.com/max/1000/1*KGBiAxjeD9JT2j6KDo0zUg.png)
 
 The **Event Loop** continuously checks the call stack to see if there’s any function that needs to run. So it has one simple job — *to monitor the Call Stack and the Callback Queue.* If the Call Stack is empty, it will take the first event from the queue and will push it to the Call Stack, which effectively runs it.
-
 Such an iteration is called a tick in the Event Loop.
+
+### Queuing Function Execution
+
+The above example looks normal, there’s nothing special about it: JavaScript finds things to execute, runs them in order. Let’s see how to defer a function until the stack is clear. The use case of setTimeout(() => {}), 5000) is to call a function, but execute it once every other function in the code has executed.
+
+
+```js
+
+console.log('Hi');
+setTimeout(function cb1() { 
+  console.log('cb1');
+}, 5000);
+console.log('Bye');
+```
+
+Let’s “execute” this code and see what happens:
+1. The state is clear. The browser console is clear, and the Call Stack is empty.
+2. `console.log('Hi')` is added to the Call Stack.
+3. `console.log('Hi')` is executed.
+4. `console.log('Hi')` is removed from the Call Stack.
+5. `setTimeout(function cb1() { ... })` is added to the Call Stack.
+6. `setTimeout(function cb1() { ... })` is executed. The browser creates a timer as part of the Web APIs. It is going to handle the countdown for you.
+7. The `setTimeout(function cb1() { ... })` itself is complete and is removed from the Call Stack.
+8. `console.log('Bye')` is added to the Call Stack.
+9. `console.log('Bye')` is executed.
+10. `console.log('Bye')` is removed from the Call Stack.
+11. After at least 5000 ms, the timer completes and it pushes the cb1 callback to the Callback Queue.
+12. The Event Loop takes cb1 from the Callback Queue and pushes it to the Call Stack(when the **call stack is empty**)
+13. `cb1` is executed and adds `console.log('cb1')` to the Call Stack.
+14. `console.log('cb1')` is executed.
+15. `console.log('cb1')` is removed from the Call Stack.
+16. `cb1` is removed from the Call Stack.
+
+![Stack and Event Loop frames](https://cdn-images-1.medium.com/max/1000/1*TozSrkk92l8ho6d8JxqF_w.gif)
