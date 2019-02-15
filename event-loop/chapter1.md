@@ -7,7 +7,12 @@ JavaScript unlike other programming languages, it’s **single threaded**. That 
 ![](https://cdn-images-1.medium.com/max/1000/0*w2rEwv9mE9xVPhRy.png)
 
 You just need to pay attention to how you write your code and avoid anything that could block the thread, like synchronous network calls or infinite loops.
+E.g. 
+```javascript
+while(true){}
+```
 
+Any code after above statement won’t be executed as while loop will loop infinitely until system is out of resources. This can also happen in infinitely recursive function call.
 
 ## Basic Architecture
 
