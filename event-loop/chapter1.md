@@ -175,9 +175,11 @@ const baz = () => console.log('baz');
 const foo = () => {
   console.log('foo');
   setTimeout(bar, 0);
-  new Promise((resolve, reject) =>
-    resolve('should be right after baz, before bar');
-  ).then(resolve => console.log(resolve));
+  new Promise((resolve, reject) => {
+  	console.log('Promise starts execution');
+  	return resolve('should be right after baz, before bar');
+  })
+  	.then(resolve => console.log(resolve));
   baz();
 };
 
@@ -187,10 +189,11 @@ foo();
 This prints:
 
 ```js
-foo
-baz
-should be right after baz, before bar
-bar
+1. foo
+2. baz
+3. Promise starts execution
+4. should be right after baz, before bar
+5. bar
 ```
 
 Another one example:
@@ -214,11 +217,11 @@ console.log('script end');
 This prints:
 
 ```js
-script start
-script end
-promise1
-promise2
-setTimeout
+1. script start
+2. script end
+3. promise1
+4. promise2
+5. setTimeout
 ```
 
 Another one:
