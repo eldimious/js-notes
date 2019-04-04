@@ -30,11 +30,17 @@ Any code after above statement won’t be executed as while loop will loop infin
 
 First let's clarify some things: 
 
- a) NodeJS is JavaScript runtime built on Chrome V8 JavaScript engine, but you can use another engine too.
+ a) **NodeJS** is JavaScript runtime built on **Chrome V8 JavaScript engine**, but you can pick another engine too.
  
- b) Javascript is single-threaded and so is any Javascript implementation like NodeJS.
+ b) Javascript is **single-threaded** and so is any Javascript implementation like NodeJS.
  
- c) V8 provides default implementation of the Event Loop. NodeJS is using event-loop provided by the libuv
+ c) **V8** provides **default implementation of the Event Loop**. **NodeJS** is using **event-loop** provided by the **libuv**
+ 
+ NodeJS System:
+ <p align="center">
+  <img src="https://cdn-images-1.medium.com/max/1600/1*nLwOhFq_i4XbxRWUoXMlQQ.png" width="350" />
+  <img src="https://adoriasoft.com/wp-content/uploads/2017/04/NODE-js-system.jpg" width="350" /> 
+</p>
 
 Like any other programming language, JavaScript runtime has *one stack and one heap storage*.
 
