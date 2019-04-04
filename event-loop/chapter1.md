@@ -26,6 +26,16 @@ Any code after above statement won’t be executed as while loop will loop infin
   <img src="https://dotnettricksweb.blob.core.windows.net/img/nodejs/node.js-architecture.png" width="350" /> 
 </p>
 
+## JS Engine
+
+First let's clarify some things: 
+
+ a) NodeJS is JavaScript runtime built on Chrome V8 JavaScript engine, but you can use another engine too.
+ 
+ b) Javascript is single-threaded and so is any Javascript implementation like NodeJS.
+ 
+ c) V8 provides default implementation of the Event Loop. NodeJS is using event-loop provided by the libuv
+
 Like any other programming language, JavaScript runtime has *one stack and one heap storage*.
 
 - **Heap** - Objects are allocated in a heap which is just a name to denote a large mostly unstructured region of memory
