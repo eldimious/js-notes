@@ -36,10 +36,16 @@ First let's clarify some things:
  
  c) **V8** provides **default implementation of the Event Loop**. **NodeJS** is using **event-loop** provided by the **libuv**
  
- NodeJS System:
+ **NodeJS System:**
+ 
  <p align="center">
   <img src="https://cdn-images-1.medium.com/max/1600/1*nLwOhFq_i4XbxRWUoXMlQQ.png" width="350" />
   <img src="https://adoriasoft.com/wp-content/uploads/2017/04/NODE-js-system.jpg" width="350" /> 
+</p>
+
+**Javascript Runtime Engine: **
+<p align="center">
+  <img src="https://cdn-images-1.medium.com/max/700/1*zeKjWCjyAGZ9JN4fvnWsiA.png" width="350" />
 </p>
 
 Like any other programming language, JavaScript runtime has *one stack and one heap storage*.
