@@ -81,7 +81,7 @@ console.log(mouse); // Has as it's own property the name and as prototype method
   //  }
 console.log(mouse.hello()); // Hello, my name is mouse
 delete mouse.name;
-console.log(cat.hello()); // Hello, my name is undefined
+console.log(mouse.hello()); // Hello, my name is undefined
 ```
 
 1. **Let's change name property in instances:**
