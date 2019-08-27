@@ -116,7 +116,7 @@ Browser comes with a JavaScript engine which provides JavaScript runtime environ
 
 ![Browser under the hood](https://cdn-images-1.medium.com/max/1000/1*lZ-KXoVNUSOwaq7q8zUBDg.png)
 
-JavaScript runtime actually consist of 2 more components viz. **event loop** and **callback queue**. Callback queue is also called as message queue or task queue.
+JavaScript runtime actually consist of 2 more components viz. **event loop** and **callback queue**. Callback queue is also called as *message queue* or *task queue*.
 
 ![Event Loop](https://cdn-images-1.medium.com/max/1000/1*KGBiAxjeD9JT2j6KDo0zUg.png)
 
