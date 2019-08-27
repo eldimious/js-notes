@@ -104,7 +104,7 @@ At this point the call stack looks like this:
 
 ![Call stack frames](https://flaviocopes.com/node-event-loop/call-stack-first-example.png)
 
-The event loop on every iteration looks if there’s something in the call stack, and executes it **until the call stack is empty**:
+**The event loop** on every iteration looks if there’s something in the call stack, and executes it **until the call stack is empty**:
 
 ![](https://flaviocopes.com/node-event-loop/execution-order-first-example.png)
 
