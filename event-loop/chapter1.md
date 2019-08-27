@@ -68,7 +68,7 @@ You mainly need to be concerned that your code will run on a single event loop, 
 
 ### Digging in the Call Stack
 
-The **call stack** is a LIFO queue (Last In, First Out). The **event loop** continuously checks the call stack to see if there’s any function that needs to run. To visualize, how JavaScript executes a program, we need to understand JavaScript runtime.
+The **call stack** is a *LIFO queue (Last In, First Out)*. The **event loop** continuously checks the call stack to see if there’s any function that needs to run. To visualize, how JavaScript executes a program, we need to understand JavaScript runtime.
 
 ![Javascript Runtime Enviroment](https://cdn-images-1.medium.com/max/1000/1*ocCc8yEvUEeOtGU2LNQnpA.png)
 
