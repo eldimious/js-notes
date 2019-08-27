@@ -158,7 +158,7 @@ Let’s “execute” this code and see what happens:
 ![Stack and Event Loop frames](https://cdn-images-1.medium.com/max/1000/1*TozSrkk92l8ho6d8JxqF_w.gif)
 
 #### How setTimeout(…) works
-It’s important to note that setTimeout(…) **doesn’t automatically put your callback on the event loop queue**. It sets up a timer. When the timer expires, the environment places your callback into the event loop. That doesn’t mean that `cb1` will be executed in 5,000 ms but rather that, in 5,000 ms, `cb1` *will be added to the queue*. The queue, however, might have other events that have been added earlier — your callback will have to wait or call stack is not empty to push it there.
+It’s important to note that setTimeout(…) **doesn’t automatically put your callback on the event loop queue. It sets up a timer. When the timer expires, the environment places your callback into the event loop**. That doesn’t mean that `cb1` will be executed in 5,000 ms but rather that, in 5,000 ms, `cb1` *will be added to the queue*. The queue, however, might have other events that have been added earlier — your callback will have to wait or call stack is not empty to push it there.
 
 Take a look at the following code:
 
