@@ -52,7 +52,7 @@ First let's clarify some things:
 
 Like any other programming language, JavaScript runtime has *one stack and one heap storage*.
 
-- **Heap** - Objects are allocated in a heap which is just a name to denote a large mostly unstructured region of memory
+- **Heap** - A heap is a free memory storage unit where you can store memory in random order. Objects are allocated in a heap which is just a name to denote a large mostly unstructured region of memory. Heap is managed by the JavaScript runtime and cleaned up by the garbage collector.
 
 - **Stack** - This represents the single thread provided for JavaScript code execution. Function calls form a stack of frames. Stack is *LIFO* (last in, first out) data storage which store current function execution context of a program.
 
