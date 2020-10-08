@@ -13,6 +13,7 @@ while(true){}
 ```
 
 Any code after above statement won’t be executed as while loop will loop infinitely until system is out of resources. This can also happen in infinitely recursive function call.
+Thanks to modern browsers, as not all open browser tabs rely on single JavaScript thread. Instead, they use separate JavaScript thread per tab or per domain
 
 ## Basic Architecture
 
