@@ -164,7 +164,7 @@ Of course after we caught the exception in `.catch` method we can use the above 
 
 ## Conclusions:
 
-- **An Async function always returns Promises**, whether you **use await or not** (if no await is present the execution is not paused and your code will then be executed synchronously, the promise starts its execution when we invoke it). They are simply syntactic sugar for creating functions that return and wait for Promises. The async keyword just declares that the asyncFunc() function returns value which is guaranteed **to be a promise**, so that callers can call asyncFunc().then(...) or await asyncFunc() safely. So when we use `async` keyword we create an **asynchronous functions that always return a Promise**.
+- **An Async function always returns Promises**, whether you **use await or not** (if no await is present the execution is not paused and your code will then be executed non-blocking manner, the promise starts its execution when we invoke it). They are simply syntactic sugar for creating functions that return and wait for Promises. The async keyword just declares that the asyncFunc() function returns value which is guaranteed **to be a promise**, so that callers can call asyncFunc().then(...) or await asyncFunc() safely. So when we use `async` keyword we create an **asynchronous functions that always return a Promise**.
 
 - We can handle an Async function when we call it, exactly like Promise.
 
